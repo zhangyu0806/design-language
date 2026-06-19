@@ -7,6 +7,16 @@
 - **共享 DNA**：间距节奏、圆角哲学、动效缓动、排版逻辑、Nevers 清单 —— 所有项目恒定不变，这是辨识度来源。
 - **4 套 Preset**：`editorial` / `brutalist` / `warm` / `dark` —— 按项目情形切换表层（颜色/字体/质感），每套含亮/暗双主题。
 
+## 四套 Preset 一览
+
+同一套骨架，四种气质。切 preset 一行代码，颜色 / 字体 / 质感全变：
+
+| editorial（编辑杂志） | brutalist（几何粗野） |
+|---|---|
+| ![editorial](docs/screenshots/editorial.png) | ![brutalist](docs/screenshots/brutalist.png) |
+| **warm（温润亲和）** | **dark（冷感科技）** |
+| ![warm](docs/screenshots/warm.png) | ![dark](docs/screenshots/dark.png) |
+
 ## 快速开始（跑起 starter 看效果）
 
 ```bash
