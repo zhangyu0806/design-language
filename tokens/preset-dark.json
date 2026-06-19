@@ -1,0 +1,78 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$description": "Preset: dark — 暗色氛围。AI产品/作品集/夜间工具。深底+单一发光色+噪点/径向光，放弃多段渐变，glow 代替投影。dark 为主，含 light 变体保证完整。",
+  "preset": { "$value": "dark" },
+  "family": {
+    "$type": "fontFamily",
+    "heading": { "$value": "\"Geist\", \"Space Grotesk\", \"MiSans\", \"HarmonyOS Sans SC\", \"PingFang SC\", sans-serif" },
+    "body": { "$value": "\"Geist\", \"MiSans\", \"HarmonyOS Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif" },
+    "mono": { "$value": "\"Geist Mono\", \"JetBrains Mono\", ui-monospace, monospace" }
+  },
+  "primitive": {
+    "$type": "color",
+    "glow-teal": { "$value": "oklch(0.80 0.15 175)", "$description": "主色 青绿发光" },
+    "glow-teal-hover": { "$value": "oklch(0.85 0.15 175)" },
+    "glow-amber": { "$value": "oklch(0.78 0.14 75)", "$description": "可选替换主色 琥珀" },
+    "deep-bg": { "$value": "oklch(0.18 0.02 250)", "$description": "深蓝灰近黑底，非纯黑" },
+    "deep-surface": { "$value": "oklch(0.23 0.022 250)" },
+    "deep-surface-2": { "$value": "oklch(0.27 0.022 250)" },
+    "off-white": { "$value": "oklch(0.92 0.01 85)", "$description": "米白偏暖正文，非纯白" },
+    "off-white-muted": { "$value": "oklch(0.68 0.012 85)" },
+    "deep-border": { "$value": "oklch(0.34 0.02 250)" },
+    "light-bg": { "$value": "oklch(0.96 0.008 230)" },
+    "light-surface": { "$value": "oklch(1 0 0)" },
+    "light-ink": { "$value": "oklch(0.25 0.02 250)" },
+    "light-muted": { "$value": "oklch(0.5 0.02 250)" },
+    "light-border": { "$value": "oklch(0.88 0.012 230)" },
+    "light-accent": { "$value": "oklch(0.55 0.13 190)" }
+  },
+  "semantic": {
+    "$type": "color",
+    "dark": {
+      "bg": { "$value": "{primitive.deep-bg}" },
+      "surface": { "$value": "{primitive.deep-surface}" },
+      "surface-raised": { "$value": "{primitive.deep-surface-2}" },
+      "text": { "$value": "{primitive.off-white}" },
+      "text-muted": { "$value": "{primitive.off-white-muted}" },
+      "border": { "$value": "{primitive.deep-border}" },
+      "accent": { "$value": "{primitive.glow-teal}" },
+      "accent-hover": { "$value": "{primitive.glow-teal-hover}" },
+      "accent-press": { "$value": "oklch(0.75 0.15 175)" },
+      "accent-fg": { "$value": "{primitive.deep-bg}" },
+      "cta": { "$value": "{primitive.glow-teal}" },
+      "cta-hover": { "$value": "{primitive.glow-teal-hover}" },
+      "cta-fg": { "$value": "{primitive.deep-bg}" },
+      "focus-ring": { "$value": "oklch(0.80 0.15 175 / 0.5)" }
+    },
+    "light": {
+      "bg": { "$value": "{primitive.light-bg}" },
+      "surface": { "$value": "{primitive.light-surface}" },
+      "surface-raised": { "$value": "{primitive.light-surface}" },
+      "text": { "$value": "{primitive.light-ink}" },
+      "text-muted": { "$value": "{primitive.light-muted}" },
+      "border": { "$value": "{primitive.light-border}" },
+      "accent": { "$value": "{primitive.light-accent}" },
+      "accent-hover": { "$value": "oklch(0.5 0.13 190)" },
+      "accent-press": { "$value": "oklch(0.45 0.13 190)" },
+      "accent-fg": { "$value": "{primitive.light-surface}" },
+      "cta": { "$value": "{primitive.light-accent}" },
+      "cta-hover": { "$value": "oklch(0.5 0.13 190)" },
+      "cta-fg": { "$value": "{primitive.light-surface}" },
+      "focus-ring": { "$value": "oklch(0.55 0.13 190 / 0.4)" }
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "$description": "dark 招牌：用 glow 发光代替投影。",
+    "sm": { "$value": "0 0 0 1px oklch(0.34 0.02 250 / 0.5)" },
+    "md": { "$value": "0 0 16px oklch(0.80 0.15 175 / 0.12)" },
+    "lg": { "$value": "0 0 32px oklch(0.80 0.15 175 / 0.18)" },
+    "glow": { "$value": "0 0 24px oklch(0.80 0.15 175 / 0.35)" }
+  },
+  "texture": {
+    "$type": "other",
+    "$description": "氛围层：噪点 + 径向光晕，替代多段渐变。",
+    "noise-opacity": { "$value": "0.05" },
+    "radial-glow": { "$value": "radial-gradient(circle at 85% 15%, oklch(0.80 0.15 175 / 0.12), transparent 50%)" }
+  }
+}

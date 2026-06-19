@@ -1,0 +1,74 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$description": "Preset: warm — 温暖人文。C端/内容社区/生活方式。陶土橙+鼠尾草绿+米白，软圆角，暖调柔影。含亮/暗双主题。",
+  "preset": { "$value": "warm" },
+  "family": {
+    "$type": "fontFamily",
+    "heading": { "$value": "\"Satoshi\", \"LXGW WenKai\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif" },
+    "body": { "$value": "\"Satoshi\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif" },
+    "mono": { "$value": "\"Geist Mono\", ui-monospace, monospace" }
+  },
+  "primitive": {
+    "$type": "color",
+    "terracotta": { "$value": "oklch(0.62 0.14 50)", "$description": "主色 陶土橙" },
+    "terracotta-hover": { "$value": "oklch(0.57 0.145 50)" },
+    "terracotta-press": { "$value": "oklch(0.52 0.15 50)" },
+    "sage": { "$value": "oklch(0.68 0.06 145)", "$description": "辅色 鼠尾草绿" },
+    "sage-hover": { "$value": "oklch(0.63 0.065 145)" },
+    "cream": { "$value": "oklch(0.97 0.015 85)", "$description": "奶油米白底" },
+    "cream-raised": { "$value": "oklch(0.99 0.012 85)" },
+    "brown-ink": { "$value": "oklch(0.30 0.02 60)", "$description": "暖深棕灰正文" },
+    "brown-muted": { "$value": "oklch(0.52 0.025 60)" },
+    "warm-border": { "$value": "oklch(0.88 0.02 70)" },
+    "dark-bg": { "$value": "oklch(0.24 0.018 50)" },
+    "dark-surface": { "$value": "oklch(0.29 0.02 50)" },
+    "dark-ink": { "$value": "oklch(0.93 0.015 80)" },
+    "dark-muted": { "$value": "oklch(0.72 0.02 70)" },
+    "dark-border": { "$value": "oklch(0.38 0.022 55)" },
+    "dark-terracotta": { "$value": "oklch(0.7 0.13 50)" }
+  },
+  "semantic": {
+    "$type": "color",
+    "light": {
+      "bg": { "$value": "{primitive.cream}" },
+      "surface": { "$value": "{primitive.cream-raised}" },
+      "text": { "$value": "{primitive.brown-ink}" },
+      "text-muted": { "$value": "{primitive.brown-muted}" },
+      "border": { "$value": "{primitive.warm-border}" },
+      "accent": { "$value": "{primitive.terracotta}" },
+      "accent-hover": { "$value": "{primitive.terracotta-hover}" },
+      "accent-press": { "$value": "{primitive.terracotta-press}" },
+      "accent-fg": { "$value": "{primitive.cream}" },
+      "cta": { "$value": "{primitive.terracotta}" },
+      "cta-hover": { "$value": "{primitive.terracotta-hover}" },
+      "cta-fg": { "$value": "{primitive.cream}" },
+      "secondary": { "$value": "{primitive.sage}" },
+      "secondary-hover": { "$value": "{primitive.sage-hover}" },
+      "focus-ring": { "$value": "oklch(0.62 0.14 50 / 0.4)" }
+    },
+    "dark": {
+      "bg": { "$value": "{primitive.dark-bg}" },
+      "surface": { "$value": "{primitive.dark-surface}" },
+      "text": { "$value": "{primitive.dark-ink}" },
+      "text-muted": { "$value": "{primitive.dark-muted}" },
+      "border": { "$value": "{primitive.dark-border}" },
+      "accent": { "$value": "{primitive.dark-terracotta}" },
+      "accent-hover": { "$value": "oklch(0.75 0.13 50)" },
+      "accent-press": { "$value": "oklch(0.8 0.13 50)" },
+      "accent-fg": { "$value": "{primitive.dark-bg}" },
+      "cta": { "$value": "{primitive.dark-terracotta}" },
+      "cta-hover": { "$value": "oklch(0.75 0.13 50)" },
+      "cta-fg": { "$value": "{primitive.dark-bg}" },
+      "secondary": { "$value": "oklch(0.72 0.06 145)" },
+      "secondary-hover": { "$value": "oklch(0.77 0.065 145)" },
+      "focus-ring": { "$value": "oklch(0.7 0.13 50 / 0.5)" }
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "$description": "warm 暖调柔影，阴影掺棕调而非纯灰。",
+    "sm": { "$value": "0 1px 3px oklch(0.30 0.02 60 / 0.08)" },
+    "md": { "$value": "0 4px 12px oklch(0.30 0.02 60 / 0.10)" },
+    "lg": { "$value": "0 12px 32px oklch(0.30 0.02 60 / 0.12)" }
+  }
+}

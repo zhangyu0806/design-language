@@ -1,0 +1,39 @@
+@import "./tokens.css";
+@import "tailwindcss";
+@import "./theme.css";
+
+/* 自托管英文字体 @font-face（文件在 public/fonts，运行时加载）。
+   url() 用绝对路径，Vite 构建期不解析、运行时由浏览器从 public 取。 */
+@font-face { font-family: "Geist"; font-weight: 400; font-display: swap; src: url("/fonts/Geist-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Geist"; font-weight: 500; font-display: swap; src: url("/fonts/Geist-Medium.woff2") format("woff2"); }
+@font-face { font-family: "Geist"; font-weight: 600; font-display: swap; src: url("/fonts/Geist-SemiBold.woff2") format("woff2"); }
+@font-face { font-family: "Geist Mono"; font-weight: 400; font-display: swap; src: url("/fonts/GeistMono-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Satoshi"; font-weight: 400 700; font-display: swap; src: url("/fonts/Satoshi-Variable.woff2") format("woff2"); }
+@font-face { font-family: "Smiley Sans"; font-weight: 400; font-display: swap; src: url("/fonts/SmileySans-Oblique.woff2") format("woff2"); }
+
+/* 中文字体（subset 产物，由 scripts/fetch-fonts.sh --subset 生成）。
+   文件不在仓库，跑过 fetch + subset 后才存在；缺失时自动回退系统中文字体。 */
+@font-face {
+  font-family: "LXGW WenKai";
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/LXGWWenKai.subset.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Noto Sans SC";
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/NotoSansSC-Regular.subset.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Noto Serif SC";
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/NotoSerifSC-Regular.subset.woff2") format("woff2");
+}
+@font-face {
+  font-family: "MiSans";
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/MiSans-Regular.subset.woff2") format("woff2");
+}

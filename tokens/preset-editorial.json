@@ -1,0 +1,70 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$description": "Preset: editorial — 编辑感。SaaS/文档/专业工具。深墨蓝+赭橙，serif 标题，极淡阴影。含亮/暗双主题。",
+  "preset": { "$value": "editorial" },
+  "family": {
+    "$type": "fontFamily",
+    "heading": { "$value": "\"Fraunces\", \"Noto Serif SC\", \"Songti SC\", \"SimSun\", serif" },
+    "body": { "$value": "\"Geist\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif" },
+    "mono": { "$value": "\"Geist Mono\", \"SFMono-Regular\", ui-monospace, monospace" }
+  },
+  "primitive": {
+    "$type": "color",
+    "ink-blue": { "$value": "oklch(0.45 0.08 250)", "$description": "主色 深墨蓝偏冷" },
+    "ink-blue-hover": { "$value": "oklch(0.40 0.085 250)" },
+    "ink-blue-press": { "$value": "oklch(0.35 0.09 250)" },
+    "clay": { "$value": "oklch(0.68 0.15 55)", "$description": "CTA 暖赭橙" },
+    "clay-hover": { "$value": "oklch(0.63 0.155 55)" },
+    "warm-white": { "$value": "oklch(0.99 0.005 90)", "$description": "暖白底" },
+    "ink": { "$value": "oklch(0.25 0.01 60)", "$description": "墨黑偏暖正文" },
+    "ink-muted": { "$value": "oklch(0.5 0.01 60)" },
+    "border": { "$value": "oklch(0.88 0.008 80)" },
+    "surface-raised": { "$value": "oklch(1 0 0)" },
+    "dark-bg": { "$value": "oklch(0.21 0.015 255)" },
+    "dark-surface": { "$value": "oklch(0.26 0.015 255)" },
+    "dark-ink": { "$value": "oklch(0.92 0.008 85)" },
+    "dark-ink-muted": { "$value": "oklch(0.7 0.01 85)" },
+    "dark-border": { "$value": "oklch(0.35 0.012 255)" },
+    "dark-accent": { "$value": "oklch(0.7 0.1 250)" }
+  },
+  "semantic": {
+    "$type": "color",
+    "light": {
+      "bg": { "$value": "{primitive.warm-white}" },
+      "surface": { "$value": "{primitive.surface-raised}" },
+      "text": { "$value": "{primitive.ink}" },
+      "text-muted": { "$value": "{primitive.ink-muted}" },
+      "border": { "$value": "{primitive.border}" },
+      "accent": { "$value": "{primitive.ink-blue}" },
+      "accent-hover": { "$value": "{primitive.ink-blue-hover}" },
+      "accent-press": { "$value": "{primitive.ink-blue-press}" },
+      "accent-fg": { "$value": "{primitive.warm-white}" },
+      "cta": { "$value": "{primitive.clay}" },
+      "cta-hover": { "$value": "{primitive.clay-hover}" },
+      "cta-fg": { "$value": "oklch(0.99 0.005 90)" },
+      "focus-ring": { "$value": "oklch(0.45 0.08 250 / 0.4)" }
+    },
+    "dark": {
+      "bg": { "$value": "{primitive.dark-bg}" },
+      "surface": { "$value": "{primitive.dark-surface}" },
+      "text": { "$value": "{primitive.dark-ink}" },
+      "text-muted": { "$value": "{primitive.dark-ink-muted}" },
+      "border": { "$value": "{primitive.dark-border}" },
+      "accent": { "$value": "{primitive.dark-accent}" },
+      "accent-hover": { "$value": "oklch(0.75 0.1 250)" },
+      "accent-press": { "$value": "oklch(0.8 0.1 250)" },
+      "accent-fg": { "$value": "{primitive.dark-bg}" },
+      "cta": { "$value": "oklch(0.72 0.15 55)" },
+      "cta-hover": { "$value": "oklch(0.77 0.15 55)" },
+      "cta-fg": { "$value": "{primitive.dark-bg}" },
+      "focus-ring": { "$value": "oklch(0.7 0.1 250 / 0.5)" }
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "$description": "editorial 阴影极淡，主要靠边框和对比。",
+    "sm": { "$value": "0 1px 2px oklch(0.25 0.01 60 / 0.04)" },
+    "md": { "$value": "0 2px 8px oklch(0.25 0.01 60 / 0.06)" },
+    "lg": { "$value": "0 8px 24px oklch(0.25 0.01 60 / 0.08)" }
+  }
+}

@@ -1,0 +1,103 @@
+# 我的设计语言（Personal Design Language）
+
+一套**共享 DNA + 多 Preset** 的个人设计系统。目的：让 codex / gemini / claude 任意一家生成的 UI 都收敛到**我的风格**，而不是语料库均值（"AI slop"）。
+
+## 这是什么
+
+- **共享 DNA**：间距节奏、圆角哲学、动效缓动、排版逻辑、Nevers 清单 —— 所有项目恒定不变，这是辨识度来源。
+- **4 套 Preset**：`editorial` / `brutalist` / `warm` / `dark` —— 按项目情形切换表层（颜色/字体/质感），每套含亮/暗双主题。
+
+## 快速开始（跑起 starter 看效果）
+
+```bash
+git clone <repo-url> design-language
+cd design-language
+
+# 配齐字体（首次必跑，字体不进仓库，见 FONTS.md）
+./scripts/fetch-fonts.sh --subset starter
+
+# 跑脚手架
+cd starter && bun install && bun run dev
+```
+
+打开后用页面顶部的 preset 切换器，看四套风格 + 明暗切换。
+
+## 文件结构
+
+```
+design-language/
+├── DESIGN.md              # ★ 核心：喂给 AI 的规范（DNA + nevers + 字体策略）
+├── PROPOSAL.md            # 完整方案与设计背景（为什么这么做）
+├── tokens/
+│   ├── core.json          # 共享 DNA（W3C DTCG 格式）
+│   ├── preset-editorial.json
+│   ├── preset-brutalist.json
+│   ├── preset-warm.json
+│   └── preset-dark.json   # 4 套表层 token
+├── presets/
+│   ├── editorial.md       # 每套 preset 的 AI 喂养片段 + 参考点
+│   ├── brutalist.md
+│   ├── warm.md
+│   └── dark.md
+├── css/
+│   └── tokens.css         # ★ 可直接用：CSS 变量 + data-preset 切换 + 明暗
+├── tailwind/
+│   └── theme.css          # Tailwind v4 @theme 映射（整体替换默认色板）
+├── starter/               # ★ React 19 + Vite 6 + Tailwind v4 脚手架，复制即开新项目
+├── scripts/               # 字体下载 + subset 工具链（fetch-fonts.sh）
+├── FONTS.md               # 字体来源与授权说明
+└── LICENSE                # MIT（代码），字体各自独立授权
+```
+
+## 在新项目里怎么用
+
+### 1. 喂给 AI（核心价值）
+在项目里新建 `CLAUDE.md` / `.cursorrules` / codex 上下文，放入：
+- `DESIGN.md` 全文（或其压缩版）
+- 当前项目选用的 `presets/<name>.md`
+
+这样 AI 的"最可能输出"就从语料均值变成「我的 DNA + 当前 preset」。
+
+### 2. 接入样式
+```css
+/* 主入口 CSS */
+@import "./design-language/css/tokens.css";
+@import "tailwindcss";
+@import "./design-language/tailwind/theme.css";
+```
+```html
+<!-- 选 preset + 明暗 -->
+<html data-preset="editorial" data-theme="light">
+```
+
+### 3. 写组件
+- 颜色只用语义类/变量：`bg-bg` `text-text` `bg-accent` `text-cta` / `var(--color-accent)`
+- 圆角用分级变量：`rounded-[var(--radius-card)]` 等
+- 排版用 composite 类：`type-h1` `type-body` `type-label`
+- 过渡用 `transition-ui`（招牌缓动，禁止 `transition-all`）
+
+## 核心铁律（详见 DESIGN.md）
+
+- 禁 Inter 标题、禁 Tailwind 默认色、禁纯黑白、禁紫渐变、禁毛玻璃、禁 `transition-all`
+- 圆角分级（按钮/输入/卡片不同），不全员一致
+- 标题 weight ≤ 600，靠字号行高扛重量
+- 中文字体必须 subset + 系统 fallback 链
+- 布局非对称，hero 非居中三等分
+
+## 中文字体（已配 fallback 链）
+
+| Preset | 中文标题 | 中文正文 |
+|---|---|---|
+| editorial | 思源宋体 Noto Serif SC | 思源黑体 Noto Sans SC |
+| brutalist | 得意黑 Smiley Sans | 思源黑体 Medium |
+| warm | 霞鹜文楷 LXGW WenKai | 思源黑体 |
+| dark | MiSans / HarmonyOS Sans SC | MiSans |
+
+生产环境记得对中文 webfont 做**子集化（subset）**，否则首屏会被几 MB 字体拖慢。
+本仓库已内置完整 subset 工具链（`scripts/fetch-fonts.sh`），自动下载 + 切片（文楷 24M → ~150K）。
+
+## 授权
+
+- 代码 / 配置 / 设计 token / 文档：**MIT**（见 `LICENSE`）。
+- 字体：仓库**不分发字体文件**，由脚本从各自官方来源下载，授权各自独立（见 `FONTS.md`）。
+  其中 Geist、得意黑、文楷、思源、Fraunces、Space Grotesk 为 SIL OFL 1.1；Satoshi 为 Fontshare 免费授权；MiSans 为小米免费商用授权。

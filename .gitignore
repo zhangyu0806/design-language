@@ -1,0 +1,9 @@
+# 字体：全部由 scripts/fetch-fonts.sh 下载生成，不进仓库（避免授权再分发问题）
+# 仅保留 .gitkeep 占位目录
+fonts/*
+!fonts/.gitkeep
+starter/public/fonts/*
+!starter/public/fonts/.gitkeep
+node_modules/
+dist/
+.venv/

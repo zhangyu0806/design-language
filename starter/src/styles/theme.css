@@ -1,0 +1,75 @@
+/* ============================================================================
+ * Tailwind v4 主题映射 · theme.css
+ * 在你的主入口 CSS 里：
+ *   @import "../css/tokens.css";   先加载设计 token（含 :root DNA 与 preset）
+ *   @import "tailwindcss";
+ *   然后本文件用 @theme 把 semantic token 映射成 Tailwind 工具类。
+ *
+ * 关键护栏：这里只暴露设计语言的语义色，不引入 Tailwind 默认色板。
+ * 因此 bg-blue-600 / text-slate-900 等默认色类会直接「不存在」→ 用了就报错。
+ * 这是有意的：逼模型和你只能用 bg-accent / text-muted 等语义类。
+ * ========================================================================== */
+
+@theme {
+  /* 颜色：仅语义层，引用 tokens.css 注入的 CSS 变量（随 preset/theme 变化） */
+  --color-*: initial;                       /* 清空 Tailwind 默认色板 */
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-text: var(--color-text);
+  --color-muted: var(--color-text-muted);
+  --color-border: var(--color-border);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-press: var(--color-accent-press);
+  --color-accent-fg: var(--color-accent-fg);
+  --color-cta: var(--color-cta);
+  --color-cta-hover: var(--color-cta-hover);
+  --color-cta-fg: var(--color-cta-fg);
+
+  /* 间距：DNA-1。保留 Tailwind 默认 4px 网格（这本就是 DNA-1 的基础），
+     额外补充故意破网格的 rhythm 值与区块级留白。不清空，避免 mb-14/gap-3 等失效。 */
+  --spacing-r1: var(--space-rhythm-1);
+  --spacing-r2: var(--space-rhythm-2);
+  --spacing-r3: var(--space-rhythm-3);
+  --spacing-section-sm: var(--space-section-sm);
+  --spacing-section-md: var(--space-section-md);
+  --spacing-section-lg: var(--space-section-lg);
+
+  /* 圆角：DNA-2 分级 */
+  --radius-*: initial;
+  --radius-none: var(--radius-none);
+  --radius-container: var(--radius-container);
+  --radius-button: var(--radius-button);
+  --radius-input: var(--radius-input);
+  --radius-card: var(--radius-card);
+  --radius-full: var(--radius-full);
+
+  /* 字体家族：随 preset 切换 */
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+
+  /* 字号阶梯：DNA-4 clamp 流式 */
+  --text-xs: var(--text-xs);
+  --text-sm: var(--text-sm);
+  --text-base: var(--text-base);
+  --text-lg: var(--text-lg);
+  --text-xl: var(--text-xl);
+  --text-2xl: var(--text-2xl);
+  --text-3xl: var(--text-3xl);
+  --text-4xl: var(--text-4xl);
+
+  /* 字重：禁止 700，最高 semibold */
+  --font-weight-regular: var(--weight-regular);
+  --font-weight-medium: var(--weight-medium);
+  --font-weight-semibold: var(--weight-semibold);
+
+  /* 动效：招牌缓动 + 意图命名时长 */
+  --ease-signature: var(--ease-signature);
+  --ease-in-out: var(--ease-in-out);
+
+  /* 阴影：随 preset（editorial 淡 / brutalist 硬边 / warm 暖 / dark glow） */
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+}

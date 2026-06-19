@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-preset="editorial" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>设计语言 Demo · Personal Design Language</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Space+Grotesk:wght@400..700&family=Noto+Serif+SC:wght@400..600&family=Noto+Sans+SC:wght@400..600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/tokens.css">
+<style>
+/* demo 专用布局，不属于设计系统本身 */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.toolbar {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center;
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-surface);
+  border-bottom: 1.5px solid var(--color-border);
+}
+.toolbar .group { display: flex; gap: var(--space-1); align-items: center; }
+.toolbar label { font-family: var(--font-body); font-size: var(--text-xs); color: var(--color-text-muted); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin-right: var(--space-1); }
+.seg { display: flex; border: 1.5px solid var(--color-border); border-radius: var(--radius-button); overflow: hidden; }
+.seg button {
+  font-family: var(--font-body); font-size: var(--text-sm); cursor: pointer;
+  padding: var(--space-1) var(--space-3); border: none; background: transparent; color: var(--color-text-muted);
+  transition: background-color var(--duration-instant) var(--ease-signature), color var(--duration-instant) var(--ease-signature);
+}
+.seg button[aria-pressed="true"] { background: var(--color-accent); color: var(--color-accent-fg); }
+
+.page { position: relative; min-height: 100vh; }
+/* dark preset 的氛围层：径向光晕 */
+[data-preset="dark"] .page::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background: var(--texture-radial-glow);
+}
+.wrap { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: var(--space-8) var(--space-5); }
+
+/* DNA-5 非对称网格 */
+.hero { display: grid; grid-template-columns: 5fr 3fr; gap: var(--space-7); align-items: end; margin-bottom: var(--space-section-sm); }
+.eyebrow { display: inline-block; margin-bottom: var(--space-3); padding: var(--space-1) var(--space-3); border: 1.5px solid var(--color-border); border-radius: var(--radius-full); }
+.hero p.lead { margin-top: var(--space-4); max-width: 46ch; color: var(--color-text-muted); }
+.hero .meta { padding-bottom: var(--space-2); border-left: 2px solid var(--color-accent); padding-left: var(--space-4); }
+.hero .meta div + div { margin-top: var(--space-rhythm-2); }
+
+.btn {
+  font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-medium); cursor: pointer;
+  padding: var(--space-2) var(--space-5); border-radius: var(--radius-button);
+  border: 1.5px solid transparent;
+  transition: transform var(--duration-quick) var(--ease-signature), background-color var(--duration-instant) var(--ease-signature), box-shadow var(--duration-quick) var(--ease-signature);
+}
+.btn-primary { background: var(--color-accent); color: var(--color-accent-fg); }
+.btn-primary:hover { background: var(--color-accent-hover); }
+.btn-primary:active { background: var(--color-accent-press); }
+.btn-cta { background: var(--color-cta); color: var(--color-cta-fg); box-shadow: var(--shadow-md); }
+.btn-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+.btn-ghost { background: transparent; color: var(--color-text); border-color: var(--color-border); }
+.btn-ghost:hover { border-color: var(--color-accent); color: var(--color-accent); }
+/* brutalist 硬边偏移阴影在 hover 时位移 */
+[data-preset="brutalist"] .btn-cta:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-lg); }
+.btn-row { display: flex; gap: var(--space-3); margin-top: var(--space-5); flex-wrap: wrap; }
+
+.section-title { margin-bottom: var(--space-5); padding-bottom: var(--space-2); border-bottom: 1.5px solid var(--color-border); }
+
+/* DNA-5 不同内容用不同卡片结构，非三等分 */
+.cards { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: var(--space-4); margin-bottom: var(--space-section-sm); }
+.card { padding: var(--space-5); background: var(--color-surface); border: 1.5px solid var(--color-border); border-radius: var(--radius-card); box-shadow: var(--shadow-sm); transition: box-shadow var(--duration-quick) var(--ease-signature), transform var(--duration-quick) var(--ease-signature); }
+.card:hover { box-shadow: var(--shadow-md); }
+[data-preset="brutalist"] .card:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-md); }
+.card .num { font-family: var(--font-mono); font-size: var(--text-3xl); color: var(--color-accent); line-height: 1; }
+.card h3 { margin: var(--space-3) 0 var(--space-2); }
+.card p { color: var(--color-text-muted); }
+.card .tag { display: inline-block; margin-bottom: var(--space-3); padding: 2px var(--space-2); border-radius: var(--radius-full); background: var(--color-accent); color: var(--color-accent-fg); font-size: var(--text-xs); }
+
+.form { display: grid; gap: var(--space-4); max-width: 420px; margin-bottom: var(--space-section-sm); }
+.field { display: grid; gap: var(--space-1); }
+.field input, .field textarea {
+  font-family: var(--font-body); font-size: var(--text-base); color: var(--color-text);
+  padding: var(--space-2) var(--space-3); background: var(--color-surface);
+  border: 1.5px solid var(--color-border); border-radius: var(--radius-input);
+  transition: border-color var(--duration-instant) var(--ease-signature), box-shadow var(--duration-instant) var(--ease-signature);
+}
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-focus-ring); }
+
+.swatches { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-section-sm); }
+.swatch { display: grid; gap: var(--space-1); }
+.swatch .chip { width: 96px; height: 56px; border-radius: var(--radius-input); border: 1.5px solid var(--color-border); }
+.swatch span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-muted); }
+
+.type-stack > * + * { margin-top: var(--space-3); }
+footer { padding: var(--space-7) var(--space-5); border-top: 1.5px solid var(--color-border); color: var(--color-text-muted); font-family: var(--font-body); font-size: var(--text-sm); }
+
+@media (max-width: 720px) {
+  .hero, .cards { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="toolbar">
+  <div class="group">
+    <label>Preset</label>
+    <div class="seg" id="presetSeg">
+      <button data-preset-val="editorial" aria-pressed="true">editorial</button>
+      <button data-preset-val="brutalist" aria-pressed="false">brutalist</button>
+      <button data-preset-val="warm" aria-pressed="false">warm</button>
+      <button data-preset-val="dark" aria-pressed="false">dark</button>
+    </div>
+  </div>
+  <div class="group">
+    <label>Theme</label>
+    <div class="seg" id="themeSeg">
+      <button data-theme-val="light" aria-pressed="true">light</button>
+      <button data-theme-val="dark" aria-pressed="false">dark</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow type-label">个人设计语言</span>
+      <h1 class="type-display">不撞脸的设计，<br>从拒绝默认值开始</h1>
+      <p class="lead type-body">同一套代码，切换 preset 就换一种气质——但间距节奏、圆角哲学、动效手感始终一致。这就是辨识度。切上面的开关看四套风格。</p>
+      <div class="btn-row">
+        <button class="btn btn-cta">开始使用</button>
+        <button class="btn btn-ghost">查看 token</button>
+      </div>
+    </div>
+    <div class="meta">
+      <div><span class="type-label">圆角</span><div class="type-body-sm">按钮/输入/卡片分级</div></div>
+      <div><span class="type-label">动效</span><div class="type-body-sm">cubic-bezier(.22,1,.36,1)</div></div>
+      <div><span class="type-label">字重</span><div class="type-body-sm">标题 ≤ 600</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="type-h2 section-title">卡片 · 非三等分结构</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="tag">主推</span>
+        <div class="num">01</div>
+        <h3 class="type-h3">共享 DNA</h3>
+        <p class="type-body-sm">间距、圆角、动效、排版逻辑恒定不变。行家一看就知道同一个人做的。</p>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3 class="type-h3">可切 Preset</h3>
+        <p class="type-body-sm">按项目换表层颜色字体质感。</p>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3 class="type-h3">喂给 AI</h3>
+        <p class="type-body-sm">改变模型输出分布。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="type-h2 section-title">语义色板（随 preset/明暗变化）</h2>
+    <div class="swatches" id="swatches"></div>
+  </section>
+
+  <section>
+    <h2 class="type-h2 section-title">表单 · 焦点态</h2>
+    <form class="form" onsubmit="return false">
+      <div class="field">
+        <label class="type-label">邮箱</label>
+        <input type="email" placeholder="you@example.com">
+      </div>
+      <div class="field">
+        <label class="type-label">留言</label>
+        <textarea rows="3" placeholder="点进来看看 focus ring 的颜色"></textarea>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary">提交</button>
+        <button class="btn btn-ghost">取消</button>
+      </div>
+    </form>
+  </section>
+
+  <section>
+    <h2 class="type-h2 section-title">排版阶梯</h2>
+    <div class="type-stack">
+      <div class="type-display">Display 大标题</div>
+      <div class="type-h1">H1 一级标题</div>
+      <div class="type-h2">H2 二级标题</div>
+      <div class="type-h3">H3 三级标题</div>
+      <div class="type-body">Body 正文：靠字号和行高扛视觉重量，不靠加粗。标题 weight 最高 600，绝不 700。中文在此跟随 preset 的中文字体与系统 fallback 链渲染。</div>
+      <div class="type-body-sm">Body-sm 小字正文，用于辅助说明。</div>
+      <div class="type-mono">type-mono · const designLanguage = "mine";</div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <span class="type-body-sm">个人设计语言 Demo · editorial / brutalist / warm / dark · 每套含亮暗双主题</span>
+</footer>
+
+</div>
+
+<script>
+const root = document.documentElement;
+const swatchKeys = [
+  ["--color-bg","背景"],["--color-surface","表面"],["--color-text","正文"],
+  ["--color-text-muted","次要"],["--color-border","边框"],
+  ["--color-accent","主色"],["--color-cta","CTA"]
+];
+function renderSwatches() {
+  const cs = getComputedStyle(root);
+  document.getElementById("swatches").innerHTML = swatchKeys.map(([v,name]) => {
+    const val = cs.getPropertyValue(v).trim();
+    return `<div class="swatch"><div class="chip" style="background:${val}"></div><span>${name}</span><span>${v}</span></div>`;
+  }).join("");
+}
+function bindSeg(id, attr, vals) {
+  const seg = document.getElementById(id);
+  seg.addEventListener("click", e => {
+    const btn = e.target.closest("button"); if (!btn) return;
+    root.setAttribute(attr, btn.dataset[vals]);
+    [...seg.children].forEach(b => b.setAttribute("aria-pressed", b === btn));
+    renderSwatches();
+  });
+}
+bindSeg("presetSeg", "data-preset", "presetVal");
+bindSeg("themeSeg", "data-theme", "themeVal");
+renderSwatches();
+</script>
+</body>
+</html>

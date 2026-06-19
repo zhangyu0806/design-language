@@ -1,0 +1,74 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$description": "Preset: brutalist — 极简硬朗。开发工具/技术博客/个人项目。高饱和单色，0 圆角，硬边偏移阴影，粗黑边。含亮/暗双主题。",
+  "preset": { "$value": "brutalist" },
+  "family": {
+    "$type": "fontFamily",
+    "heading": { "$value": "\"Space Grotesk\", \"Smiley Sans\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif" },
+    "body": { "$value": "\"Space Grotesk\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif" },
+    "mono": { "$value": "\"JetBrains Mono\", \"Geist Mono\", ui-monospace, monospace" }
+  },
+  "radiusOverride": {
+    "$type": "dimension",
+    "$description": "brutalist 特化 DNA-2：全部圆角归零。消费端用这组覆盖 core.radius。",
+    "container": { "$value": "0px" },
+    "button": { "$value": "0px" },
+    "input": { "$value": "0px" },
+    "card": { "$value": "0px" },
+    "full": { "$value": "0px" }
+  },
+  "primitive": {
+    "$type": "color",
+    "volt": { "$value": "oklch(0.85 0.18 100)", "$description": "主色 电光黄" },
+    "volt-hover": { "$value": "oklch(0.8 0.19 100)" },
+    "pure-white": { "$value": "oklch(1 0 0)" },
+    "near-black": { "$value": "oklch(0.15 0 0)", "$description": "正文近纯黑" },
+    "gray-muted": { "$value": "oklch(0.45 0 0)" },
+    "hard-border": { "$value": "oklch(0.15 0 0)", "$description": "粗黑边 = 近纯黑" },
+    "dark-bg": { "$value": "oklch(0.15 0 0)" },
+    "dark-surface": { "$value": "oklch(0.19 0 0)" },
+    "dark-ink": { "$value": "oklch(0.96 0 0)" },
+    "dark-muted": { "$value": "oklch(0.65 0 0)" },
+    "dark-border": { "$value": "oklch(0.96 0 0)" }
+  },
+  "semantic": {
+    "$type": "color",
+    "light": {
+      "bg": { "$value": "{primitive.pure-white}" },
+      "surface": { "$value": "{primitive.pure-white}" },
+      "text": { "$value": "{primitive.near-black}" },
+      "text-muted": { "$value": "{primitive.gray-muted}" },
+      "border": { "$value": "{primitive.hard-border}" },
+      "accent": { "$value": "{primitive.volt}" },
+      "accent-hover": { "$value": "{primitive.volt-hover}" },
+      "accent-press": { "$value": "oklch(0.75 0.19 100)" },
+      "accent-fg": { "$value": "{primitive.near-black}" },
+      "cta": { "$value": "{primitive.near-black}" },
+      "cta-hover": { "$value": "oklch(0.25 0 0)" },
+      "cta-fg": { "$value": "{primitive.pure-white}" },
+      "focus-ring": { "$value": "oklch(0.85 0.18 100 / 0.6)" }
+    },
+    "dark": {
+      "bg": { "$value": "{primitive.dark-bg}" },
+      "surface": { "$value": "{primitive.dark-surface}" },
+      "text": { "$value": "{primitive.dark-ink}" },
+      "text-muted": { "$value": "{primitive.dark-muted}" },
+      "border": { "$value": "{primitive.dark-border}" },
+      "accent": { "$value": "{primitive.volt}" },
+      "accent-hover": { "$value": "{primitive.volt-hover}" },
+      "accent-press": { "$value": "oklch(0.78 0.19 100)" },
+      "accent-fg": { "$value": "{primitive.near-black}" },
+      "cta": { "$value": "{primitive.volt}" },
+      "cta-hover": { "$value": "{primitive.volt-hover}" },
+      "cta-fg": { "$value": "{primitive.near-black}" },
+      "focus-ring": { "$value": "oklch(0.85 0.18 100 / 0.7)" }
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "$description": "brutalist 招牌：硬边偏移阴影，无 blur。",
+    "sm": { "$value": "2px 2px 0 oklch(0.15 0 0)" },
+    "md": { "$value": "4px 4px 0 oklch(0.15 0 0)" },
+    "lg": { "$value": "6px 6px 0 oklch(0.15 0 0)" }
+  }
+}

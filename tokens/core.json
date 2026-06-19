@@ -1,0 +1,171 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$description": "共享 DNA — 所有 preset 恒定继承。间距/圆角/动效/排版尺度。这是你的设计指纹。",
+  "space": {
+    "$type": "dimension",
+    "$description": "DNA-1 间距节奏。基础 4px，含故意破网格的 rhythm 值。",
+    "0": { "$value": "0px" },
+    "1": { "$value": "4px" },
+    "2": { "$value": "8px" },
+    "3": { "$value": "12px" },
+    "4": { "$value": "16px" },
+    "5": { "$value": "24px" },
+    "6": { "$value": "32px" },
+    "7": { "$value": "48px" },
+    "8": { "$value": "64px" },
+    "9": { "$value": "96px" },
+    "10": { "$value": "128px" },
+    "rhythm-1": { "$value": "5px", "$description": "故意破 4px 网格，制造人为节奏" },
+    "rhythm-2": { "$value": "14px", "$description": "故意破网格" },
+    "rhythm-3": { "$value": "22px", "$description": "故意破网格" },
+    "section-sm": { "$value": "56px", "$description": "区块级留白，非等比" },
+    "section-md": { "$value": "88px" },
+    "section-lg": { "$value": "136px" }
+  },
+  "radius": {
+    "$type": "dimension",
+    "$description": "DNA-2 圆角分级。绝不全员同一值。brutalist preset 会整体覆盖为 0。",
+    "none": { "$value": "0px" },
+    "container": { "$value": "2px", "$description": "大容器，几乎硬边" },
+    "button": { "$value": "4px" },
+    "input": { "$value": "6px" },
+    "card": { "$value": "10px" },
+    "full": { "$value": "9999px", "$description": "仅头像/徽标/pill" }
+  },
+  "duration": {
+    "$type": "duration",
+    "$description": "DNA-3 动效时长，按意图命名而非数字。",
+    "instant": { "$value": "100ms", "$description": "状态切换" },
+    "quick": { "$value": "180ms", "$description": "hover/press" },
+    "smooth": { "$value": "280ms", "$description": "位移/展开" }
+  },
+  "ease": {
+    "$type": "cubicBezier",
+    "$description": "DNA-3 招牌缓动曲线。easeOutQuint，有弹性不夸张。",
+    "signature": { "$value": [0.22, 1, 0.36, 1] },
+    "in-out": { "$value": [0.65, 0, 0.35, 1] }
+  },
+  "fontSize": {
+    "$type": "dimension",
+    "$description": "DNA-4 字号阶梯，clamp 流式响应。",
+    "xs": { "$value": "clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem)" },
+    "sm": { "$value": "clamp(0.875rem, 0.84rem + 0.18vw, 0.9375rem)" },
+    "base": { "$value": "clamp(1rem, 0.96rem + 0.2vw, 1.0625rem)" },
+    "lg": { "$value": "clamp(1.125rem, 1.06rem + 0.3vw, 1.25rem)" },
+    "xl": { "$value": "clamp(1.375rem, 1.25rem + 0.6vw, 1.625rem)" },
+    "2xl": { "$value": "clamp(1.75rem, 1.5rem + 1.2vw, 2.25rem)" },
+    "3xl": { "$value": "clamp(2.25rem, 1.85rem + 2vw, 3.25rem)" },
+    "4xl": { "$value": "clamp(2.75rem, 2.1rem + 3.2vw, 4.5rem)" }
+  },
+  "fontWeight": {
+    "$type": "fontWeight",
+    "$description": "DNA-4 标题禁止 700，靠字号行高扛重量。",
+    "regular": { "$value": 400 },
+    "medium": { "$value": 500 },
+    "semibold": { "$value": 600 }
+  },
+  "lineHeight": {
+    "$type": "number",
+    "tight": { "$value": 1.1, "$description": "大标题" },
+    "snug": { "$value": 1.3, "$description": "小标题" },
+    "normal": { "$value": 1.6, "$description": "正文" },
+    "relaxed": { "$value": 1.75, "$description": "长文" }
+  },
+  "letterSpacing": {
+    "$type": "dimension",
+    "$description": "DNA-4 标题负字间距。",
+    "tight": { "$value": "-0.02em", "$description": "标题" },
+    "normal": { "$value": "0em", "$description": "正文" },
+    "wide": { "$value": "0.04em", "$description": "全大写小标签" }
+  },
+  "neutral": {
+    "$type": "color",
+    "$description": "8 级中性灰阶骨架（色相由各 preset 注入，此处为亮度参考点）。preset 会覆盖具体 oklch 值。",
+    "50": { "$value": "oklch(0.985 0 0)" },
+    "100": { "$value": "oklch(0.95 0 0)" },
+    "200": { "$value": "oklch(0.9 0 0)" },
+    "300": { "$value": "oklch(0.8 0 0)" },
+    "400": { "$value": "oklch(0.65 0 0)" },
+    "500": { "$value": "oklch(0.5 0 0)" },
+    "600": { "$value": "oklch(0.4 0 0)" },
+    "700": { "$value": "oklch(0.3 0 0)" },
+    "800": { "$value": "oklch(0.22 0 0)" },
+    "900": { "$value": "oklch(0.15 0 0)" }
+  },
+  "typography": {
+    "$type": "typography",
+    "$description": "DNA-4 composite 排版 token。font-family 引用 preset 注入的 {family.*}。",
+    "display": {
+      "$value": {
+        "fontFamily": "{family.heading}",
+        "fontSize": "{fontSize.4xl}",
+        "fontWeight": "{fontWeight.semibold}",
+        "lineHeight": "{lineHeight.tight}",
+        "letterSpacing": "{letterSpacing.tight}"
+      }
+    },
+    "h1": {
+      "$value": {
+        "fontFamily": "{family.heading}",
+        "fontSize": "{fontSize.3xl}",
+        "fontWeight": "{fontWeight.semibold}",
+        "lineHeight": "{lineHeight.tight}",
+        "letterSpacing": "{letterSpacing.tight}"
+      }
+    },
+    "h2": {
+      "$value": {
+        "fontFamily": "{family.heading}",
+        "fontSize": "{fontSize.2xl}",
+        "fontWeight": "{fontWeight.medium}",
+        "lineHeight": "{lineHeight.snug}",
+        "letterSpacing": "{letterSpacing.tight}"
+      }
+    },
+    "h3": {
+      "$value": {
+        "fontFamily": "{family.heading}",
+        "fontSize": "{fontSize.xl}",
+        "fontWeight": "{fontWeight.medium}",
+        "lineHeight": "{lineHeight.snug}",
+        "letterSpacing": "{letterSpacing.normal}"
+      }
+    },
+    "body": {
+      "$value": {
+        "fontFamily": "{family.body}",
+        "fontSize": "{fontSize.base}",
+        "fontWeight": "{fontWeight.regular}",
+        "lineHeight": "{lineHeight.normal}",
+        "letterSpacing": "{letterSpacing.normal}"
+      }
+    },
+    "body-sm": {
+      "$value": {
+        "fontFamily": "{family.body}",
+        "fontSize": "{fontSize.sm}",
+        "fontWeight": "{fontWeight.regular}",
+        "lineHeight": "{lineHeight.normal}",
+        "letterSpacing": "{letterSpacing.normal}"
+      }
+    },
+    "label": {
+      "$value": {
+        "fontFamily": "{family.body}",
+        "fontSize": "{fontSize.xs}",
+        "fontWeight": "{fontWeight.medium}",
+        "lineHeight": "{lineHeight.snug}",
+        "letterSpacing": "{letterSpacing.wide}"
+      }
+    },
+    "mono": {
+      "$value": {
+        "fontFamily": "{family.mono}",
+        "fontSize": "{fontSize.sm}",
+        "fontWeight": "{fontWeight.regular}",
+        "lineHeight": "{lineHeight.normal}",
+        "letterSpacing": "{letterSpacing.normal}"
+      }
+    }
+  }
+}
