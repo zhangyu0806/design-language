@@ -22,6 +22,8 @@ cd starter && bun install && bun run dev
 
 打开后用页面顶部的 preset 切换器，看四套风格 + 明暗切换。
 
+> 怎么在新项目里调用这套设计语言（开新项目 / 接已有项目 / 喂 AI）见 **[USAGE.md](USAGE.md)**。
+
 ## 文件结构
 
 ```
