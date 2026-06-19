@@ -13,11 +13,15 @@ git clone https://github.com/zhangyu0806/design-language
 cp -r design-language/starter my-new-project
 cd my-new-project
 
-# 配齐字体（脚本在 design-language 根目录）
+# 配齐字体（脚本在 design-language 根目录，--subset . 表示输出到当前项目）
 ../design-language/scripts/fetch-fonts.sh --subset .
 
 bun install && bun run dev
 ```
+
+> ⚠️ **中文 subset 只包含当前源码里用到的字**。写完/改完中文文案后要**重跑一次** `--subset .`，
+> 否则新增的汉字不在子集里，会回退成系统字体，出现「同一行某些字大小/字形不一致」。
+> 建议：把 `../design-language/scripts/fetch-fonts.sh --subset .` 加进 build 前置脚本，或上线前手动重跑。
 
 改 `index.html` 根标签选风格：
 

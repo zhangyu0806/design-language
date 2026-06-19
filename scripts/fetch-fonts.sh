@@ -17,8 +17,13 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$SCRIPT_DIR/.."
-PUB="$ROOT/starter/public/fonts"
 RAW="$ROOT/fonts"
+
+# --subset DIR：把 DIR 当作目标项目，字体输出到 DIR/public/fonts；
+# 不带参数时默认输出到本仓库 starter（开发本仓库用）。
+TARGET="$ROOT/starter"
+if [[ "${1:-}" == "--subset" && -n "${2:-}" ]]; then TARGET="$(cd "$2" && pwd)"; fi
+PUB="$TARGET/public/fonts"
 mkdir -p "$PUB" "$RAW"
 
 GEIST="https://github.com/vercel/geist-font/raw/main/packages/next/dist/fonts"
@@ -78,5 +83,5 @@ if [[ "${1:-}" == "--subset" && -n "${2:-}" ]]; then
   done
 fi
 
-echo "[fetch] 完成。英文 @font-face 已内联在 starter/src/styles/index.css。"
-echo "中文字体请用 --subset 生成（见 scripts/README.md），勿直接全量 @font-face。"
+echo "[fetch] 完成。字体已输出到 $PUB"
+echo "英文 @font-face 已内联在 starter/src/styles/index.css（复制 starter 的新项目自带）。"
