@@ -8,6 +8,7 @@
 - **4 套 Preset**：`editorial` / `brutalist` / `warm` / `dark` —— 按项目情形切换表层（颜色/字体/质感），每套含亮/暗双主题。
 - **AI 交付门禁**：生成 UI 前先做 `Design read / Design risks / Preflight target`，交付前再用反 slop 清单审首屏、节奏、视觉资产、状态与文案。
 - **Redesign Audit**：接已有项目时先输出 `Mode / Problems / Plan / Do not change`，保住业务信息、品牌资产和信息架构，不让 AI 为了“变好看”乱改内容。
+- **机制吸收，不照抄**：吸收优秀 design skill 的任务分档、两轮审稿、确定性检测、动效工艺；不照搬评分、品牌话术或另一套审美。
 
 ## 新增的反 AI slop 工作流
 
@@ -17,7 +18,9 @@
 2. **报风险**：先指出最容易滑向 AI slop 的 2–3 个点，例如假截图、满页标签、同义 CTA、无来源精确数字。
 3. **定门禁**：列出本次交付必须通过的 3–5 条审稿规则。
 4. **再写 UI**：只使用语义变量、分级圆角、具名过渡、preset 指纹，不碰默认 Tailwind 蓝紫渐变/毛玻璃套路。
-5. **交付前审稿**：检查首屏、section 节奏、视觉资产、交互状态、文案数字；如果是 redesign，还要明确哪些内容不能改。
+5. **交付前审稿**：重要页面走“截图/交互实测 → 视觉/工程/业务三视角评审 → 精修”；如果是 redesign，还要明确哪些内容不能改。
+
+能写成脚本的规则优先进入 CI / lint，例如 root 与 starter 文档同步、禁默认 Tailwind 色、禁 `transition-all`；prompt 负责判断，脚本负责兜底。
 
 ## 四套 Preset 一览
 

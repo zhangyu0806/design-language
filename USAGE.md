@@ -22,8 +22,8 @@ dl-apply ~/my-app editorial    # 指定 preset
 
 ```text
 Design read: 页面类型 / 目标用户 / preset / 明暗主题
-Design risks: 本页面最容易滑向 AI slop 的 2–3 个风险
-Preflight target: 本次必须通过的 3–5 条审稿规则
+Design risks: 任务胆量档位 / 本页面最容易滑向 AI slop 的 2–3 个风险
+Preflight target: 本次必须通过的 3–5 条审稿规则 / 是否需要两轮制
 ```
 
 样式接入（tokens.css / theme.css）和字体仍按下面「场景 B」手动做一次；`dl-apply` 只负责喂 AI 那一层（最重要的一层）。
@@ -136,11 +136,15 @@ HTML 根标签选 preset 与明暗：
 
 不要只问“用了 token 没有”，还要问“页面是不是仍然像 AI 模板”。每次 UI 交付前过这 5 类：
 
+先按任务类型决定胆量：设置页/表单/仪表盘收敛，SaaS landing 中档，404/作品集/活动页放开。重要页面走两轮：**生成 → 截图或交互实测 → 视觉/工程/业务三视角评审 → 精修**。
+
 1. **首屏**：标题是否最多 2 行？CTA 是否首屏可见？导航是否桌面单行？
 2. **节奏**：section 结构是否重复？是否连续 zigzag 超过 2 段？eyebrow 是否过多？
 3. **视觉资产**：有没有真实截图/图片/图表/品牌资产？是否用了 div 假截图？
 4. **状态**：loading / empty / error / disabled 是否齐全？按钮和表单对比度是否可读？
 5. **文案**：是否有人话？是否有无来源精确数字？中文产品是否避免英文 SaaS 腔？
+
+能脚本检测的规则优先进入 CI / lint，例如 root 与 starter 文档同步、禁 `transition-all`、禁默认 Tailwind 色。prompt 负责判断，脚本负责兜底。
 
 给已有项目 redesign 时，先让 AI 输出 audit：
 

@@ -15,8 +15,10 @@
 - 过渡具名属性 + `var(--ease-signature)`，禁止 `transition-all`
 - 标题 weight ≤ 600，用 `type-*` composite 类
 - 遵守 `.ai/DESIGN.md` 的全部 NEVERS
-- 涉及 UI / 视觉 / 页面重构时，先给：Design read / Design risks / Preflight target
+- 涉及 UI / 视觉 / 页面重构时，先判断任务类型与胆量档位，再给：Design read / Design risks / Preflight target
 - 交付前按 `.ai/DESIGN.md` 的页面级反 slop 审稿清单检查首屏、section 节奏、视觉资产、状态、文案
+- 重要页面走两轮：生成 → 截图/交互实测 → 视觉/工程/业务三视角评审 → 精修
+- 动效只用具名属性，默认 `var(--ease-signature)`；列表 stagger 50–70ms；hover 用 `@media (hover: hover)` 包住
 
 ## 组件
 

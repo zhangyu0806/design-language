@@ -86,9 +86,11 @@ className="[transition:transform_var(--duration-quick)_var(--ease-signature)]"
 
 ```text
 Design read: 当前页面类型 / 目标用户 / 选用 preset / 明暗主题
-Design risks: 最容易滑向 AI slop 的 2–3 个风险
-Preflight target: 本次交付必须通过的 3–5 条审稿规则
+Design risks: 任务胆量档位 / 最容易滑向 AI slop 的 2–3 个风险
+Preflight target: 本次交付必须通过的 3–5 条审稿规则 / 是否需要两轮制
 ```
+
+胆量档位：设置页/表单/仪表盘用低胆量高纪律；SaaS landing 用中档；404/作品集/活动页可以提高视觉冒险度，但不能违反 NEVERS。
 
 交付前按 `.ai/DESIGN.md` 的页面级反 slop 审稿清单检查：
 
@@ -99,6 +101,15 @@ Preflight target: 本次交付必须通过的 3–5 条审稿规则
 - 文案与数字是否可信：不编造精确数字，不堆同义 CTA，不用无信息量标签制造层次。
 
 如果是在改已有项目，先做 Redesign Audit：输出 `Mode / Problems / Plan / Do not change`，明确哪些信息架构、品牌资产、真实内容不能静默改变。
+
+## 动效工艺默认值
+
+- 默认缓动：`var(--ease-signature)` = `cubic-bezier(0.22, 1, 0.36, 1)`。
+- hover / press：只动画 `transform`、`opacity`、`background-color`、`border-color`，禁 `transition-all`。
+- 入场动效：可用 `scale(0.95 → 1)` + `opacity(0 → 1)`，时长 180–280ms。
+- 列表 stagger：每项间隔 50–70ms；超过 8 项时减弱，不要拖慢操作。
+- 触屏设备：hover 效果必须用 `@media (hover: hover)` 包住，避免移动端误触。
+- 任何动效都必须尊重 `prefers-reduced-motion`。
 
 ## 换风格
 
