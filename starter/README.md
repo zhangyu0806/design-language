@@ -27,9 +27,9 @@ bun run preview  # 预览构建产物
 
 ```
 starter/
-├── .ai/                      # ★ 喂给 AI 的设计规范
-│   ├── DESIGN.md             #   全局 DNA + nevers（放进 CLAUDE.md/.cursorrules）
-│   └── presets/*.md          #   各 preset 喂养片段
+├── .ai/                      # ★ 喂给 AI 的设计规范与审稿门禁
+│   ├── DESIGN.md             #   全局 DNA + nevers + 反 slop 审稿 + redesign 协议
+│   └── presets/*.md          #   各 preset 喂养片段 + 页面指纹/禁忌
 ├── index.html                # data-preset / data-theme 初始值在 <html>
 ├── public/
 │   └── fonts/                # 自托管字体：英文 woff2（进仓库）+ 中文 subset（脚本生成，不进仓库）
@@ -82,9 +82,28 @@ className="[transition:transform_var(--duration-quick)_var(--ease-signature)]"
 新项目里把 `.ai/DESIGN.md` + 当前用的 `.ai/presets/<name>.md` 放进 `CLAUDE.md` / `.cursorrules` / codex 上下文。
 这样 codex / gemini / claude 的输出会收敛到你的设计语言，而非 AI slop。
 
+涉及 UI / 视觉 / 页面重构时，先让 AI 输出三行短声明，再动代码：
+
+```text
+Design read: 当前页面类型 / 目标用户 / 选用 preset / 明暗主题
+Design risks: 最容易滑向 AI slop 的 2–3 个风险
+Preflight target: 本次交付必须通过的 3–5 条审稿规则
+```
+
+交付前按 `.ai/DESIGN.md` 的页面级反 slop 审稿清单检查：
+
+- 首屏是否成立：标题、副标题、CTA、导航没有堆满。
+- Section 节奏是否有变化：长 landing 不重复同一种左右图文/卡片布局。
+- 视觉资产是否真实：不用彩色渐变框冒充截图或产品图。
+- 状态是否完整：异步区域、数据区块、表单流程考虑 loading / empty / error / disabled。
+- 文案与数字是否可信：不编造精确数字，不堆同义 CTA，不用无信息量标签制造层次。
+
+如果是在改已有项目，先做 Redesign Audit：输出 `Mode / Problems / Plan / Do not change`，明确哪些信息架构、品牌资产、真实内容不能静默改变。
+
 ## 换风格
 
 改 `index.html` 里 `<html data-preset="..." data-theme="...">`，或运行时用 `setPreset`。
+如果也更新 AI 指令，记得同步 `CLAUDE.md` 里的当前 preset 和 `.ai/presets/<name>.md` 引用。
 要加新 preset：在 `tokens.css` 加一段 `[data-preset="xxx"]` 覆盖颜色/字体/阴影即可，DNA 自动继承。
 
 ## 中文字体（已自托管 + subset）
