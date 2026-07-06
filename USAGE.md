@@ -4,6 +4,30 @@
 
 ---
 
+## 最快路径：`dl-apply`（一条命令注入到任意项目）
+
+已把仓库 clone 到本机（如 `~/design-language`）并软链 `scripts/dl-apply.sh` 到 `~/.local/bin/dl-apply` 后：
+
+```bash
+dl-apply <项目目录> [preset]   # preset 默认 dark，可选 editorial/brutalist/warm/dark
+dl-apply .                     # 当前目录，dark preset
+dl-apply ~/my-app editorial    # 指定 preset
+```
+
+它把 `DESIGN.md`（全局 DNA + NEVERS）+ `presets/<preset>.md` 拼进项目的 `AGENTS.md`，
+放在 `<!-- BEGIN design-language -->` 标记区块内——**幂等**（重跑只刷新区块，不动你其他内容），
+**可切 preset**（换 preset 重跑即替换）。之后 AI 打开项目就读到你的设计语言，生成的 UI 收敛到你的风格。
+
+样式接入（tokens.css / theme.css）和字体仍按下面「场景 B」手动做一次；`dl-apply` 只负责喂 AI 那一层（最重要的一层）。
+
+首次安装软链：
+```bash
+git clone https://github.com/zhangyu0806/design-language ~/design-language
+ln -sf ~/design-language/scripts/dl-apply.sh ~/.local/bin/dl-apply
+```
+
+---
+
 ## 场景 A：开全新项目（推荐）
 
 starter 已内置字体配置和 AI 规范，复制即用：
