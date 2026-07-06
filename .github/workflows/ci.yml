@@ -9,16 +9,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: starter
     steps:
       - uses: actions/checkout@v4
+
+      - name: Verify design docs are synced
+        run: |
+          cmp DESIGN.md starter/.ai/DESIGN.md
+          for preset in editorial brutalist warm dark; do
+            cmp "presets/${preset}.md" "starter/.ai/presets/${preset}.md"
+          done
 
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
       - run: bun install --frozen-lockfile
+        working-directory: starter
 
       - run: bun run build
+        working-directory: starter
