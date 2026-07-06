@@ -18,7 +18,7 @@ dl-apply ~/my-app editorial    # 指定 preset
 放在 `<!-- BEGIN design-language -->` 标记区块内——**幂等**（重跑只刷新区块，不动你其他内容），
 **可切 preset**（换 preset 重跑即替换）。之后 AI 打开项目就读到你的设计语言，生成的 UI 收敛到你的风格。
 
-生成或改 UI 时，要求 AI 先给三行短声明，再动代码：
+涉及 UI / 视觉 / 页面重构时，要求 AI 先给三行短声明，再动代码：
 
 ```text
 Design read: 页面类型 / 目标用户 / preset / 明暗主题
@@ -71,10 +71,13 @@ bun install && bun run dev
 
 把设计规范拼进项目的 AI 指令文件，让 codex / claude / gemini 收敛到你的风格：
 
+优先用上面的 `dl-apply`，它会在 `AGENTS.md` 的标记区块内幂等更新，不覆盖你原有规则。需要手动拼接时，先输出到临时文件，确认后再合并：
+
 ```bash
 cat design-language/starter/.ai/DESIGN.md \
     design-language/starter/.ai/presets/editorial.md \
-    > my-project/CLAUDE.md      # 或 .cursorrules / AGENTS.md
+    > /tmp/design-language-context.md
+# 检查后，把内容追加到 CLAUDE.md / .cursorrules / AGENTS.md 的明确标记区块内
 ```
 
 > `DESIGN.md` = 全局 DNA + Nevers 清单；`presets/<name>.md` = 当前选用风格。

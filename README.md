@@ -4,7 +4,7 @@
 
 ## 这是什么
 
-- **共享 DNA**：间距节奏、圆角哲学、动效缓动、排版逻辑、Nevers 清单 —— 所有项目恒定不变，这是辨识度来源。
+- **共享 DNA**：间距节奏、圆角哲学、动效缓动、排版逻辑、Nevers 清单、页面级反 slop 审稿 —— 所有项目恒定不变，这是辨识度来源。
 - **4 套 Preset**：`editorial` / `brutalist` / `warm` / `dark` —— 按项目情形切换表层（颜色/字体/质感），每套含亮/暗双主题。
 
 ## 四套 Preset 一览
@@ -32,13 +32,13 @@ cd starter && bun install && bun run dev
 
 打开后用页面顶部的 preset 切换器，看四套风格 + 明暗切换。
 
-> 怎么在新项目里调用这套设计语言（开新项目 / 接已有项目 / 喂 AI）见 **[USAGE.md](USAGE.md)**。
+> 怎么在新项目里调用这套设计语言（开新项目 / 接已有项目 / 喂 AI / 交付前审稿）见 **[USAGE.md](USAGE.md)**。
 
 ## 文件结构
 
 ```
 design-language/
-├── DESIGN.md              # ★ 核心：喂给 AI 的规范（DNA + nevers + 字体策略）
+├── DESIGN.md              # ★ 核心：喂给 AI 的规范（DNA + nevers + 审稿协议）
 ├── PROPOSAL.md            # 完整方案与设计背景（为什么这么做）
 ├── tokens/
 │   ├── core.json          # 共享 DNA（W3C DTCG 格式）
@@ -70,6 +70,8 @@ design-language/
 
 这样 AI 的"最可能输出"就从语料均值变成「我的 DNA + 当前 preset」。
 
+生成或重构 UI 时，先要求 AI 给三行短声明：`Design read` / `Design risks` / `Preflight target`；交付前再按 `DESIGN.md` 的页面级反 slop 清单审首屏、section 节奏、视觉资产、状态、文案。
+
 ### 2. 接入样式
 ```css
 /* 主入口 CSS */
@@ -91,10 +93,12 @@ design-language/
 ## 核心铁律（详见 DESIGN.md）
 
 - 禁 Inter 标题、禁 Tailwind 默认色、禁纯黑白、禁紫渐变、禁毛玻璃、禁 `transition-all`
+- 禁假截图 div、满页无信息标签、同义 CTA 堆叠、无来源精确数字、异步/数据/表单状态缺席
 - 圆角分级（按钮/输入/卡片不同），不全员一致
 - 标题 weight ≤ 600，靠字号行高扛重量
 - 中文字体必须 subset + 系统 fallback 链
 - 布局非对称，hero 非居中三等分
+- 现有项目 redesign 先做 `Mode / Problems / Plan / Do not change`，不得静默改信息架构、品牌资产或真实内容
 
 ## 中文字体（已配 fallback 链）
 
