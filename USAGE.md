@@ -18,6 +18,14 @@ dl-apply ~/my-app editorial    # 指定 preset
 放在 `<!-- BEGIN design-language -->` 标记区块内——**幂等**（重跑只刷新区块，不动你其他内容），
 **可切 preset**（换 preset 重跑即替换）。之后 AI 打开项目就读到你的设计语言，生成的 UI 收敛到你的风格。
 
+生成或改 UI 时，要求 AI 先给三行短声明，再动代码：
+
+```text
+Design read: 页面类型 / 目标用户 / preset / 明暗主题
+Design risks: 本页面最容易滑向 AI slop 的 2–3 个风险
+Preflight target: 本次必须通过的 3–5 条审稿规则
+```
+
 样式接入（tokens.css / theme.css）和字体仍按下面「场景 B」手动做一次；`dl-apply` 只负责喂 AI 那一层（最重要的一层）。
 
 首次安装软链：
@@ -118,6 +126,27 @@ HTML 根标签选 preset 与明暗：
    ```tsx
    className="[transition:transform_var(--duration-quick)_var(--ease-signature)]"
    ```
+
+---
+
+## 页面交付前审稿（新增）
+
+不要只问“用了 token 没有”，还要问“页面是不是仍然像 AI 模板”。每次 UI 交付前过这 5 类：
+
+1. **首屏**：标题是否最多 2 行？CTA 是否首屏可见？导航是否桌面单行？
+2. **节奏**：section 结构是否重复？是否连续 zigzag 超过 2 段？eyebrow 是否过多？
+3. **视觉资产**：有没有真实截图/图片/图表/品牌资产？是否用了 div 假截图？
+4. **状态**：loading / empty / error / disabled 是否齐全？按钮和表单对比度是否可读？
+5. **文案**：是否有人话？是否有无来源精确数字？中文产品是否避免英文 SaaS 腔？
+
+给已有项目 redesign 时，先让 AI 输出 audit：
+
+```text
+Mode: preserve 或 overhaul
+Problems: 布局 / token / 字体 / 状态 / 文案 / 可访问性 / 响应式
+Plan: 先修系统性问题，再修局部组件
+Do not change: URL / 表单字段 / 埋点 / 法律价格文案 / 关键 CTA 意图
+```
 
 ---
 

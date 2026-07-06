@@ -15,6 +15,8 @@
 - 过渡具名属性 + `var(--ease-signature)`，禁止 `transition-all`
 - 标题 weight ≤ 600，用 `type-*` composite 类
 - 遵守 `.ai/DESIGN.md` 的全部 NEVERS
+- 生成或改 UI 前先给：Design read / Design risks / Preflight target
+- 交付前按 `.ai/DESIGN.md` 的页面级反 slop 审稿清单检查首屏、section 节奏、视觉资产、状态、文案
 
 ## 组件
 
