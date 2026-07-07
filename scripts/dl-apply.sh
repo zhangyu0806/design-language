@@ -5,6 +5,7 @@
 #   dl-apply <项目目录> [preset]        # 注入设计规范到 <项目>/AGENTS.md（默认 preset=dark）
 #   dl-apply .                          # 对当前目录，用默认 dark preset
 #   dl-apply ~/foo editorial            # 指定 editorial preset
+#   dl-apply --check <项目目录>          # 只检查是否已注入，不修改文件
 #
 # 做两件事:
 #   1) 把 DESIGN.md（全局 DNA + NEVERS）+ presets/<preset>.md 拼进项目的 AGENTS.md
@@ -29,6 +30,12 @@ END_MARK="<!-- END design-language -->"
 
 die() { printf 'dl-apply: %s\n' "$1" >&2; exit 1; }
 
+MODE="apply"
+if [ "${1:-}" = "--check" ]; then
+  MODE="check"
+  shift
+fi
+
 TARGET="${1:-}"
 PRESET="${2:-dark}"
 
@@ -46,6 +53,17 @@ PRESET_MD="$DL_ROOT/presets/$PRESET.md"
 
 TARGET_ABS="$(cd "$TARGET" && pwd)"
 AGENTS="$TARGET_ABS/AGENTS.md"
+
+if [ "$MODE" = "check" ]; then
+  if [ -f "$AGENTS" ] && grep -qF "$BEGIN_MARK" "$AGENTS"; then
+    PRESET_LINE="$(grep -m1 '^# 设计语言（当前 preset:' "$AGENTS" || true)"
+    printf 'dl-apply: OK，已注入设计语言区块: %s\n' "$AGENTS"
+    [ -n "$PRESET_LINE" ] && printf 'dl-apply: %s\n' "$PRESET_LINE"
+    exit 0
+  fi
+  printf 'dl-apply: MISSING，未在 %s 找到设计语言区块。运行: dl-apply "%s" %s\n' "$AGENTS" "$TARGET_ABS" "$PRESET" >&2
+  exit 2
+fi
 
 BLOCK="$(mktemp)"
 trap 'rm -f "$BLOCK"' EXIT

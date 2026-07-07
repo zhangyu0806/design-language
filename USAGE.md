@@ -12,11 +12,20 @@
 dl-apply <项目目录> [preset]   # preset 默认 dark，可选 editorial/brutalist/warm/dark
 dl-apply .                     # 当前目录，dark preset
 dl-apply ~/my-app editorial    # 指定 preset
+dl-apply --check .             # 只检查当前项目是否已注入，不改文件
 ```
 
 它把 `DESIGN.md`（全局 DNA + NEVERS）+ `presets/<preset>.md` 拼进项目的 `AGENTS.md`，
 放在 `<!-- BEGIN design-language -->` 标记区块内——**幂等**（重跑只刷新区块，不动你其他内容），
 **可切 preset**（换 preset 重跑即替换）。之后 AI 打开项目就读到你的设计语言，生成的 UI 收敛到你的风格。
+
+以后每次开新 UI 项目，固定先跑：
+
+```bash
+dl-apply --check . || dl-apply . editorial
+```
+
+完全新项目优先复制 `starter/`；已有项目或脚手架生成后的项目用 `dl-apply` 注入 `AGENTS.md`。
 
 涉及 UI / 视觉 / 页面重构时，要求 AI 先给三行短声明，再动代码：
 

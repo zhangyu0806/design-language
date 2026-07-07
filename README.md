@@ -49,6 +49,14 @@ cd starter && bun install && bun run dev
 
 > 怎么在新项目里调用这套设计语言（开新项目 / 接已有项目 / 喂 AI / 交付前审稿）见 **[USAGE.md](USAGE.md)**。
 
+以后每次开新 UI 项目，先执行一次检查/注入：
+
+```bash
+dl-apply --check . || dl-apply . editorial
+```
+
+完全新项目优先复制 `starter/`；已有项目或脚手架生成后的项目用 `dl-apply` 注入 `AGENTS.md`。
+
 ## 文件结构
 
 ```
