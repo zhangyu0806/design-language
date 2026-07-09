@@ -1,0 +1,352 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "vite.config.ts",
+      "file_type": "code",
+      "source_file": "starter/vite.config.ts",
+      "source_location": "L1",
+      "id": "starter_vite_config_ts",
+      "community": 6,
+      "norm_label": "vite.config.ts"
+    },
+    {
+      "label": "main.tsx",
+      "file_type": "code",
+      "source_file": "starter/src/main.tsx",
+      "source_location": "L1",
+      "id": "starter_src_main_tsx",
+      "community": 2,
+      "norm_label": "main.tsx"
+    },
+    {
+      "label": "App.tsx",
+      "file_type": "code",
+      "source_file": "starter/src/App.tsx",
+      "source_location": "L1",
+      "id": "starter_src_app_tsx",
+      "community": 2,
+      "norm_label": "app.tsx"
+    },
+    {
+      "label": "usePreset.ts",
+      "file_type": "code",
+      "source_file": "starter/src/hooks/usePreset.ts",
+      "source_location": "L1",
+      "id": "starter_src_hooks_usepreset_ts",
+      "community": 1,
+      "norm_label": "usepreset.ts"
+    },
+    {
+      "label": "read()",
+      "file_type": "code",
+      "source_file": "starter/src/hooks/usePreset.ts",
+      "source_location": "L12",
+      "id": "usepreset_read",
+      "community": 1,
+      "norm_label": "read()"
+    },
+    {
+      "label": "usePreset()",
+      "file_type": "code",
+      "source_file": "starter/src/hooks/usePreset.ts",
+      "source_location": "L18",
+      "id": "usepreset_usepreset",
+      "community": 1,
+      "norm_label": "usepreset()"
+    },
+    {
+      "label": "Button.tsx",
+      "file_type": "code",
+      "source_file": "starter/src/components/Button.tsx",
+      "source_location": "L1",
+      "id": "starter_src_components_button_tsx",
+      "community": 3,
+      "norm_label": "button.tsx"
+    },
+    {
+      "label": "Button()",
+      "file_type": "code",
+      "source_file": "starter/src/components/Button.tsx",
+      "source_location": "L23",
+      "id": "button_button",
+      "community": 3,
+      "norm_label": "button()"
+    },
+    {
+      "label": "Field.tsx",
+      "file_type": "code",
+      "source_file": "starter/src/components/Field.tsx",
+      "source_location": "L1",
+      "id": "starter_src_components_field_tsx",
+      "community": 4,
+      "norm_label": "field.tsx"
+    },
+    {
+      "label": "Field()",
+      "file_type": "code",
+      "source_file": "starter/src/components/Field.tsx",
+      "source_location": "L7",
+      "id": "field_field",
+      "community": 4,
+      "norm_label": "field()"
+    },
+    {
+      "label": "Card.tsx",
+      "file_type": "code",
+      "source_file": "starter/src/components/Card.tsx",
+      "source_location": "L1",
+      "id": "starter_src_components_card_tsx",
+      "community": 5,
+      "norm_label": "card.tsx"
+    },
+    {
+      "label": "Card()",
+      "file_type": "code",
+      "source_file": "starter/src/components/Card.tsx",
+      "source_location": "L7",
+      "id": "card_card",
+      "community": 5,
+      "norm_label": "card()"
+    },
+    {
+      "label": "split_font.py",
+      "file_type": "code",
+      "source_file": "scripts/split_font.py",
+      "source_location": "L1",
+      "id": "scripts_split_font_py",
+      "community": 0,
+      "norm_label": "split_font.py"
+    },
+    {
+      "label": "codepoints()",
+      "file_type": "code",
+      "source_file": "scripts/split_font.py",
+      "source_location": "L17",
+      "id": "split_font_codepoints",
+      "community": 0,
+      "norm_label": "codepoints()"
+    },
+    {
+      "label": "make_ranges()",
+      "file_type": "code",
+      "source_file": "scripts/split_font.py",
+      "source_location": "L24",
+      "id": "split_font_make_ranges",
+      "community": 0,
+      "norm_label": "make_ranges()"
+    },
+    {
+      "label": "unicode_range_str()",
+      "file_type": "code",
+      "source_file": "scripts/split_font.py",
+      "source_location": "L35",
+      "id": "split_font_unicode_range_str",
+      "community": 0,
+      "norm_label": "unicode_range_str()"
+    },
+    {
+      "label": "subset_chunk()",
+      "file_type": "code",
+      "source_file": "scripts/split_font.py",
+      "source_location": "L53",
+      "id": "split_font_subset_chunk",
+      "community": 0,
+      "norm_label": "subset_chunk()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "scripts/split_font.py",
+      "source_location": "L69",
+      "id": "split_font_main",
+      "community": 0,
+      "norm_label": "main()"
+    }
+  ],
+  "links": [
+    {
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "starter/src/main.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "starter_src_main_tsx",
+      "_tgt": "starter_src_app_tsx",
+      "source": "starter_src_main_tsx",
+      "target": "starter_src_app_tsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "starter/src/hooks/usePreset.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_src": "starter_src_hooks_usepreset_ts",
+      "_tgt": "usepreset_read",
+      "source": "starter_src_hooks_usepreset_ts",
+      "target": "usepreset_read",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "starter/src/hooks/usePreset.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "starter_src_hooks_usepreset_ts",
+      "_tgt": "usepreset_usepreset",
+      "source": "starter_src_hooks_usepreset_ts",
+      "target": "usepreset_usepreset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "starter/src/components/Button.tsx",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_src": "starter_src_components_button_tsx",
+      "_tgt": "button_button",
+      "source": "starter_src_components_button_tsx",
+      "target": "button_button",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "starter/src/components/Field.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_src": "starter_src_components_field_tsx",
+      "_tgt": "field_field",
+      "source": "starter_src_components_field_tsx",
+      "target": "field_field",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "starter/src/components/Card.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_src": "starter_src_components_card_tsx",
+      "_tgt": "card_card",
+      "source": "starter_src_components_card_tsx",
+      "target": "card_card",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/split_font.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_src": "scripts_split_font_py",
+      "_tgt": "split_font_codepoints",
+      "source": "scripts_split_font_py",
+      "target": "split_font_codepoints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/split_font.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_src": "scripts_split_font_py",
+      "_tgt": "split_font_make_ranges",
+      "source": "scripts_split_font_py",
+      "target": "split_font_make_ranges",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/split_font.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_src": "scripts_split_font_py",
+      "_tgt": "split_font_unicode_range_str",
+      "source": "scripts_split_font_py",
+      "target": "split_font_unicode_range_str",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/split_font.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_src": "scripts_split_font_py",
+      "_tgt": "split_font_subset_chunk",
+      "source": "scripts_split_font_py",
+      "target": "split_font_subset_chunk",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/split_font.py",
+      "source_location": "L69",
+      "weight": 1.0,
+      "_src": "scripts_split_font_py",
+      "_tgt": "split_font_main",
+      "source": "scripts_split_font_py",
+      "target": "split_font_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/split_font.py",
+      "source_location": "L89",
+      "weight": 1.0,
+      "_src": "split_font_main",
+      "_tgt": "split_font_codepoints",
+      "source": "split_font_codepoints",
+      "target": "split_font_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/split_font.py",
+      "source_location": "L90",
+      "weight": 1.0,
+      "_src": "split_font_main",
+      "_tgt": "split_font_make_ranges",
+      "source": "split_font_make_ranges",
+      "target": "split_font_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/split_font.py",
+      "source_location": "L97",
+      "weight": 1.0,
+      "_src": "split_font_main",
+      "_tgt": "split_font_unicode_range_str",
+      "source": "split_font_unicode_range_str",
+      "target": "split_font_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/split_font.py",
+      "source_location": "L96",
+      "weight": 1.0,
+      "_src": "split_font_main",
+      "_tgt": "split_font_subset_chunk",
+      "source": "split_font_subset_chunk",
+      "target": "split_font_main",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}

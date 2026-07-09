@@ -7,3 +7,4 @@ starter/public/fonts/*
 node_modules/
 dist/
 .venv/
+graphify-out/cache/
