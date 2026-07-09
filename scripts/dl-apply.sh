@@ -8,7 +8,7 @@
 #   dl-apply --check <项目目录>          # 只检查是否已注入，不修改文件
 #
 # 做两件事:
-#   1) 把 DESIGN.md（全局 DNA + NEVERS）+ presets/<preset>.md 拼进项目的 AGENTS.md
+#   1) 把 DESIGN.md（全局 DNA + NEVERS）+ STYLE_PREVIEW.md + presets/<preset>.md 拼进项目的 AGENTS.md
 #      （已存在则在标记区块内幂等更新，不动你其他内容）
 #   2) 提示如何接入样式（tokens.css / theme.css）与字体脚本
 #
@@ -48,7 +48,9 @@ esac
 
 DESIGN_MD="$DL_ROOT/DESIGN.md"
 PRESET_MD="$DL_ROOT/presets/$PRESET.md"
+STYLE_PREVIEW_MD="$DL_ROOT/STYLE_PREVIEW.md"
 [ -f "$DESIGN_MD" ] || die "找不到 $DESIGN_MD"
+[ -f "$STYLE_PREVIEW_MD" ] || die "找不到 $STYLE_PREVIEW_MD"
 [ -f "$PRESET_MD" ] || die "找不到 $PRESET_MD"
 
 TARGET_ABS="$(cd "$TARGET" && pwd)"
@@ -76,6 +78,10 @@ trap 'rm -f "$BLOCK"' EXIT
   echo "> 上游: https://github.com/zhangyu0806/design-language"
   echo ""
   cat "$DESIGN_MD"
+  echo ""
+  echo "---"
+  echo ""
+  cat "$STYLE_PREVIEW_MD"
   echo ""
   echo "---"
   echo ""
@@ -109,6 +115,7 @@ cat <<EOF
      （或复制 tokens.css / theme.css 进项目内自托管，跨环境更稳）
   2. HTML 根标签: <html data-preset="$PRESET" data-theme="light">
   3. 要中文字体效果: $DL_ROOT/scripts/fetch-fonts.sh --subset "$TARGET_ABS"
+  4. 风格方向未定时: 让 AI 按 STYLE_PREVIEW.md 先生成 design-previews/YYYY-MM-DD-任务名/index.html
 
 AI 现在会从 $AGENTS 读到你的设计语言，生成的 UI 收敛到「你的风格」而非 AI 均值。
 EOF

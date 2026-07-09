@@ -15,6 +15,7 @@ jobs:
       - name: Verify design docs are synced
         run: |
           cmp DESIGN.md starter/.ai/DESIGN.md
+          cmp STYLE_PREVIEW.md starter/.ai/STYLE_PREVIEW.md
           for preset in editorial brutalist warm dark; do
             cmp "presets/${preset}.md" "starter/.ai/presets/${preset}.md"
           done
