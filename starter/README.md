@@ -29,6 +29,7 @@ bun run preview  # 预览构建产物
 starter/
 ├── .ai/                      # ★ 喂给 AI 的设计规范与审稿门禁
 │   ├── DESIGN.md             #   全局 DNA + nevers + 反 slop 审稿 + redesign 协议
+│   ├── STYLE_PREVIEW.md      #   风格试衣间：方向未定时先看 mini mockup 再选
 │   └── presets/*.md          #   各 preset 喂养片段 + 页面指纹/禁忌
 ├── index.html                # data-preset / data-theme 初始值在 <html>
 ├── public/
@@ -82,12 +83,15 @@ className="[transition:transform_var(--duration-quick)_var(--ease-signature)]"
 新项目里把 `.ai/DESIGN.md` + 当前用的 `.ai/presets/<name>.md` 放进 `CLAUDE.md` / `.cursorrules` / codex 上下文。
 这样 codex / gemini / claude 的输出会收敛到你的设计语言，而非 AI slop。
 
+方向不明确时，再让 AI 读取 `.ai/STYLE_PREVIEW.md`，先在 `design-previews/YYYY-MM-DD-任务名/index.html` 做 3–4 个真实 mini mockup，并用中文三拨盘（视觉冒险度 / 动效强度 / 信息密度）让用户先看后选。
+
 涉及 UI / 视觉 / 页面重构时，先让 AI 输出三行短声明，再动代码：
 
 ```text
 Design read: 当前页面类型 / 目标用户 / 选用 preset / 明暗主题
 Design risks: 任务胆量档位 / 最容易滑向 AI slop 的 2–3 个风险
 Preflight target: 本次交付必须通过的 3–5 条审稿规则 / 是否需要两轮制
+Style preview: 方向未定时给 3–4 个方向 / 三拨盘初始值 / 是否需要 design-previews 预览页
 ```
 
 胆量档位：设置页/表单/仪表盘用低胆量高纪律；SaaS landing 用中档；404/作品集/活动页可以提高视觉冒险度，但不能违反 NEVERS。

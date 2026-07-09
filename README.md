@@ -7,6 +7,7 @@
 - **共享 DNA**：间距节奏、圆角哲学、动效缓动、排版逻辑、Nevers 清单、页面级反 slop 审稿 —— 所有项目恒定不变，这是辨识度来源。
 - **4 套 Preset**：`editorial` / `brutalist` / `warm` / `dark` —— 按项目情形切换表层（颜色/字体/质感），每套含亮/暗双主题。
 - **AI 交付门禁**：生成 UI 前先做 `Design read / Design risks / Preflight target`，交付前再用反 slop 清单审首屏、节奏、视觉资产、状态与文案。
+- **风格试衣间**：方向不明确时先产出 `design-previews/YYYY-MM-DD-任务名/index.html`，用 3–4 个真实 mini mockup 和中文三拨盘让用户先看后选。
 - **Redesign Audit**：接已有项目时先输出 `Mode / Problems / Plan / Do not change`，保住业务信息、品牌资产和信息架构，不让 AI 为了“变好看”乱改内容。
 - **机制吸收，不照抄**：吸收优秀 design skill 的任务分档、两轮审稿、确定性检测、动效工艺；不照搬评分、品牌话术或另一套审美。
 
@@ -17,8 +18,9 @@
 1. **读设计**：确认页面类型、目标用户、当前 preset、明暗主题。
 2. **报风险**：先指出最容易滑向 AI slop 的 2–3 个点，例如假截图、满页标签、同义 CTA、无来源精确数字。
 3. **定门禁**：列出本次交付必须通过的 3–5 条审稿规则。
-4. **再写 UI**：只使用语义变量、分级圆角、具名过渡、preset 指纹，不碰默认 Tailwind 蓝紫渐变/毛玻璃套路。
-5. **交付前审稿**：重要页面走“截图/交互实测 → 视觉/工程/业务三视角评审 → 精修”；如果是 redesign，还要明确哪些内容不能改。
+4. **先看方向**：如果风格未定，做风格试衣间：3–4 个真实 mini mockup + 视觉冒险度 / 动效强度 / 信息密度三拨盘。
+5. **再写 UI**：只使用语义变量、分级圆角、具名过渡、preset 指纹，不碰默认 Tailwind 蓝紫渐变/毛玻璃套路。
+6. **交付前审稿**：重要页面走“截图/交互实测 → 视觉/工程/业务三视角评审 → 精修”；如果是 redesign，还要明确哪些内容不能改。
 
 能写成脚本的规则优先进入 CI / lint，例如 root 与 starter 文档同步、禁默认 Tailwind 色、禁 `transition-all`；prompt 负责判断，脚本负责兜底。
 
@@ -62,6 +64,7 @@ dl-apply --check . || dl-apply . editorial
 ```
 design-language/
 ├── DESIGN.md              # ★ 核心：喂给 AI 的规范（DNA + nevers + 审稿协议）
+├── STYLE_PREVIEW.md       # ★ 风格试衣间：方向未定时先看 3–4 个 mini mockup 再选
 ├── PROPOSAL.md            # 完整方案与设计背景（为什么这么做）
 ├── tokens/
 │   ├── core.json          # 共享 DNA（W3C DTCG 格式）
@@ -95,6 +98,8 @@ design-language/
 
 生成或重构 UI 时，先要求 AI 给三行短声明：`Design read` / `Design risks` / `Preflight target`；交付前再按 `DESIGN.md` 的页面级反 slop 清单审首屏、section 节奏、视觉资产、状态、文案。
 
+方向不明确时，再要求 AI 按 `STYLE_PREVIEW.md` 生成风格试衣间：`design-previews/YYYY-MM-DD-任务名/index.html`，让用户从 3–4 个真实 mini mockup 中选择方向后再正式实现。
+
 ### 2. 接入样式
 ```css
 /* 主入口 CSS */
@@ -122,6 +127,7 @@ design-language/
 - 中文字体必须 subset + 系统 fallback 链
 - 布局非对称，hero 非居中三等分
 - 现有项目 redesign 先做 `Mode / Problems / Plan / Do not change`，不得静默改信息架构、品牌资产或真实内容
+- 方向不明确时先看后选：3–4 个方向、中文三拨盘、真实 mini mockup；推荐不是默认授权
 
 ## 中文字体（已配 fallback 链）
 

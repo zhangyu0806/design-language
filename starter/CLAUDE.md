@@ -1,6 +1,7 @@
 # 项目 AI 指令
 
 本项目使用个人设计语言。生成任何 UI 前，必读 `.ai/DESIGN.md`（全局 DNA + Nevers）。
+方向不明确时，必读 `.ai/STYLE_PREVIEW.md`，先做 3–4 个可看的 mini mockup 让用户选方向。
 
 ## 当前 preset
 
@@ -16,6 +17,7 @@
 - 标题 weight ≤ 600，用 `type-*` composite 类
 - 遵守 `.ai/DESIGN.md` 的全部 NEVERS
 - 涉及 UI / 视觉 / 页面重构时，先判断任务类型与胆量档位，再给：Design read / Design risks / Preflight target
+- 风格方向未定时，追加 Style preview：3–4 个方向 / 三拨盘初始值 / 是否生成 `design-previews` 预览页
 - 交付前按 `.ai/DESIGN.md` 的页面级反 slop 审稿清单检查首屏、section 节奏、视觉资产、状态、文案
 - 重要页面走两轮：生成 → 截图/交互实测 → 视觉/工程/业务三视角评审 → 精修
 - 动效只用具名属性，默认 `var(--ease-signature)`；列表 stagger 50–70ms；hover 用 `@media (hover: hover)` 包住
