@@ -8,13 +8,33 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+
+      - name: Install pinned Google Chrome
+        id: chrome
+        uses: browser-actions/setup-chrome@2e1d749697dd1612b833dba4a722266286fbefcd
+        with:
+          chrome-version: 144.0.7559.109
+
+      - name: Export and verify pinned Google Chrome
+        run: |
+          CHROME_PATH='${{ steps.chrome.outputs.chrome-path }}'
+          chrome_version="$("$CHROME_PATH" --version)"
+          chrome_version="${chrome_version#"${chrome_version%%[![:space:]]*}"}"
+          chrome_version="${chrome_version%"${chrome_version##*[![:space:]]}"}"
+          test "$chrome_version" = 'Google Chrome 144.0.7559.109'
+          printf 'CHROME_PATH=%s\n' "$CHROME_PATH" >> "$GITHUB_ENV"
 
       - name: Verify design contracts and dl-apply
         run: |
           bash -n scripts/dl-apply.sh scripts/dl-apply-registry.sh tests/*.sh
+          for file in scripts/dl-preview-*.mjs tests/dl-preview-*.mjs; do node --check "$file"; done
           bash tests/run.sh
 
       - uses: oven-sh/setup-bun@v2

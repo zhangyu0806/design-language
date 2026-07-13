@@ -22,6 +22,18 @@ assert_mirror() {
   fi
 }
 
+assert_no_stale_preview_wording() {
+  FILE="$1"
+  STALE_PREVIEW_WORDING='第二阶段[^。]*(没有(预览)?服务器|不提供预览服务器)|第二阶段[^。]*预览服务器[^。]*(没有|不提供)'
+
+  if grep -Eq "$STALE_PREVIEW_WORDING" "$ROOT/$FILE"; then
+    printf 'not ok - stale no-server wording: %s\n' "$FILE" >&2
+    FAILURES=$((FAILURES + 1))
+  else
+    printf 'ok - no stale no-server wording: %s\n' "$FILE"
+  fi
+}
+
 assert_mirror "DESIGN.md" "starter/.ai/DESIGN.md"
 assert_mirror "STYLE_PREVIEW.md" "starter/.ai/STYLE_PREVIEW.md"
 assert_mirror "presets/editorial.md" "starter/.ai/presets/editorial.md"
@@ -32,6 +44,14 @@ assert_mirror "references/UI_PATTERNS.md" "starter/.ai/references/UI_PATTERNS.md
 assert_mirror "references/MOTION.md" "starter/.ai/references/MOTION.md"
 assert_mirror "references/DATA_VIS.md" "starter/.ai/references/DATA_VIS.md"
 assert_mirror "references/PREFERENCES.md" "starter/.ai/references/PREFERENCES.md"
+
+assert_no_stale_preview_wording "STYLE_PREVIEW.md"
+assert_no_stale_preview_wording "starter/.ai/STYLE_PREVIEW.md"
+assert_no_stale_preview_wording "README.md"
+assert_no_stale_preview_wording "USAGE.md"
+assert_no_stale_preview_wording "scripts/README.md"
+assert_no_stale_preview_wording "starter/README.md"
+assert_no_stale_preview_wording "starter/CLAUDE.md"
 
 [ "$FAILURES" -eq 0 ] || exit 1
 printf 'test-doc-sync: passed\n'

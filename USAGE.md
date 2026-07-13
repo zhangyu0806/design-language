@@ -34,7 +34,7 @@ dl-apply -- ./-project dark             # -- 后内容只按位置参数解释
 - **默认层**：核心层加 `STYLE_PREVIEW.md` 和当前 preset。`STYLE_PREVIEW.md` 始终注入，不是可选模块。
 - **可选层**：四个 `references/` 模块，只在任务需要且调用者显式选择时注入。
 
-第二阶段没有预览服务器、监听器或后台进程。`design-previews/YYYY-MM-DD-任务名/index.html` 仍是静态、自包含 HTML，可直接用浏览器打开。
+`design-previews/YYYY-MM-DD-任务名/index.html` 始终是静态、自包含 HTML，可在各平台直接以 `file:` 打开，这是默认路径。`dl-apply` 只注入文档，不复制、不安装、也不启动预览选择服务。
 
 以后每次开新 UI 项目，固定先跑：
 
@@ -61,6 +61,44 @@ Style preview: 3–4 个方向 / 三拨盘初始值 / 是否生成 design-previe
 ```
 
 样式接入（tokens.css / theme.css）和字体仍按下面「场景 B」手动做一次；`dl-apply` 只负责喂 AI 那一层（最重要的一层）。风格试衣间只决定方向，正式实现仍必须走 `DESIGN.md` 的 token、状态、审稿门禁。
+
+### 可选预览选择服务
+
+当静态页面内的选择状态已经够用时，不要启动服务，直接以 `file:` 打开 `index.html`。只有需要生成可被后续 agent 消费的 `selection.json` 时，才在 Linux/WSL2、Node.js 22 且 `/proc/self/fd` 功能正常的环境中，从 design-language checkout 显式启动持久 CLI：
+
+```bash
+node ~/design-language/scripts/dl-preview-cli.mjs --port 0 [--exit-on-select] <preview-dir>
+```
+
+方括号表示可选参数，实际命令不要保留方括号。参数如下：
+
+| 参数 | 含义 |
+|---|---|
+| `<preview-dir>` | 必填，当前用户拥有的可信预览目录；根目录必须有符合 `STYLE_PREVIEW.md` 契约的 `index.html` |
+| `--port <0..65535>` | 可选，默认 `0`；`0` 由系统分配空闲端口，避免固定端口冲突 |
+| `--exit-on-select` | 可选，第一个通过全部验证的选择成功写入后退出 `0`；不加时持续运行，后续成功选择可替换旧结果 |
+| `--` | 可选，结束选项解析，供目录名以 `-` 开头时使用 |
+
+启动时先验证 Linux 与 `/proc/self/fd`。验证必须发生在访问或 `realpath` 用户预览根目录、解析 manifest、监听、清理或写入之前；不支持的平台、探针失败和其他启动失败都只输出 `{"event":"error","code":"PREVIEW_START_FAILED"}`，不暴露路径或底层错误。服务监听成功后，stdout 只给一行 ready JSON，字段为 `event`、`url`、`host`、`port`、`output`、`session`。打开其中精确的 `http://127.0.0.1:<port>/` URL，不要替换成 `localhost`。选择成功后，服务在预览目录同目录原子替换权限为 `0600` 的 `selection.json`，字段为 `schemaVersion`、`session`、`choice`、`directionLabel`、`feedback`、`dials`、`selectedAt`。
+
+结果消费必须绑定当前进程：保存 ready JSON 的 `session`，读取 `selection.json` 后逐字比较两者。session 不同表示文件来自旧服务进程，是过期结果，不能驱动当前实现。普通模式可能被后续选择覆盖；需要只接受一次选择时使用 `--exit-on-select`。
+
+静态与服务行为有明确区别：
+
+- `file:`、`localhost`、HTTPS、其他 hostname 或 session 获取失败时，bootstrap 只更新页面内 `aria-pressed` 和中文状态，不发网络请求，也不声称已保存。
+- 只有页面从 `http://127.0.0.1:<port>/` 加载且 HTML 契约合法时，bootstrap 才同源获取 session，并在点击方向后提交选择。
+- HTML 必须只含一个活动、DOM 等价的 manifest。注释、`template`、raw-text/RCDATA、外来命名空间、malformed 文本或多候选中的伪 manifest 均不算合法候选。
+- malformed manifest 或 DOM 数据不会抛异常、fetch、绑定监听器或猜测替代节点。只有存在唯一合法状态节点时，才精确显示 `预览配置无效`。
+- 持久化成功只接受精确 HTTP `204`；客户端完整消费该响应后才能显示保存成功，其他状态包括其他 2xx 都算失败。
+- 停止服务不会破坏预览。回到直接打开 `index.html` 即恢复静态默认行为。
+
+安全边界：服务固定绑定 `127.0.0.1`，没有 `--host`，不提供 CORS、tunnel、proxy、daemon、watch、自动打开或公共分享。不要使用 `sudo`，不要放到反向代理后，也不要做端口转发、公网转发或隧道暴露。它面向当前用户拥有的可信预览目录，不防御同一用户权限下的恶意本地进程，也不承诺未执行目录 fsync 时的断电持久性。
+
+有效选择按完成校验后的顺序进入单进程 FIFO store。close 原子拒绝新工作并排空已排队工作；force fence 建立后，未开始的队列工作不得启动，后续文件阶段与 rename 也不得开始。SIGINT/SIGTERM 从同一关闭起点计时，先给 4 秒优雅期，第 4 秒 force，第 5 秒是包含 force 与清理在内的绝对外层截止时间，不会重新计时。
+
+临时文件使用严格名称 `.selection.json.<24位十六进制>.<24位十六进制>.tmp`，创建即为 `0600`。正常失败与关闭会尽力清理，但极端不可中断的文件系统调用可能在绝对截止时留下这种严格命名的 `0600` 临时文件。下次有效启动会在读取 manifest 或监听前按严格名称尽力清理，文档不承诺故障文件系统上的无条件清理。
+
+仓库的本地标准测试入口与 CI 会运行真实、固定为 `144.0.7559.109` 的 Chrome E2E，以及可控阻塞写入的 SIGINT/SIGTERM 回归，覆盖精确 `204`、4 秒 force 和 5 秒绝对截止。这些浏览器与阻塞 seam 仅属于测试基础设施，不会增加预览页或服务的运行时包和依赖。生产实现保持七个职责单一的模块，每个不超过 250 纯 LOC。
 
 ### 严格 `--check` 与退出码
 

@@ -9,7 +9,7 @@
 - **三层指导**：核心层 `DESIGN.md` 管所有项目的共同契约；默认层再加入静态 `STYLE_PREVIEW.md` 与当前 preset；可选层按任务加载专项参考，不塞进每个项目。
 - **4 个可选模块**：`ui-patterns` / `motion` / `data-vis` / `preferences`，必须通过 `dl-apply --modules` 显式选择，不会默认加载。
 - **AI 交付门禁**：生成 UI 前先做 `Design read / Functional contract / Design risks / Preflight target / Modules`，交付前再用反 slop 清单审首屏、节奏、视觉资产、状态与文案。
-- **风格试衣间**：方向不明确时先产出 `design-previews/YYYY-MM-DD-任务名/index.html`，用 3–4 个真实 mini mockup 和中文三拨盘让用户先看后选。第二阶段没有预览服务器，`design-previews` 仍是静态、自包含 HTML。
+- **风格试衣间**：方向不明确时先产出 `design-previews/YYYY-MM-DD-任务名/index.html`，用 3–4 个真实 mini mockup 和中文三拨盘让用户先看后选。静态、自包含 HTML 始终是默认；需要持久化选择时，可从 checkout 显式启动本机选择服务。
 - **Redesign Audit**：接已有项目时先输出 `Mode / Problems / Plan / Do not change`，保住业务信息、品牌资产和信息架构，不让 AI 为了“变好看”乱改内容。
 - **机制吸收，不照抄**：吸收优秀 design skill 的任务分档、两轮审稿、确定性检测、动效工艺；不照搬评分、品牌话术或另一套审美。
 
@@ -51,6 +51,14 @@ cd starter && bun install && bun run dev
 
 打开后用页面顶部的 preset 切换器，看四套风格 + 明暗切换。
 
+风格预览默认直接以 `file:` 打开静态、自包含的 `index.html`，这条路径跨平台可用。只有需要把用户选择写成后续 agent 可读取的结果时，才在 Linux/WSL2、Node.js 22 且 `/proc/self/fd` 功能正常的环境中，从 design-language checkout 对符合 `STYLE_PREVIEW.md` 明示 HTML 契约的可信预览目录运行：
+
+```bash
+node ~/design-language/scripts/dl-preview-cli.mjs --port 0 design-previews/YYYY-MM-DD-任务名
+```
+
+CLI 会在访问用户预览根目录、监听、清理或写入前验证 Linux 与 `/proc/self/fd`；失败只输出私有的 `PREVIEW_START_FAILED`，不会触碰用户根目录。成功后打开 stdout ready JSON 中精确的 `127.0.0.1` URL。选择持久化只有在客户端收到精确 HTTP `204` 并完整消费响应后才算成功。随后读取权限为 `0600`、同目录原子替换的 `selection.json`，并核对它的 `session` 与本次 ready JSON 一致。一次选择后自动退出可加 `--exit-on-select`。这是 checkout 级可选工具，`dl-apply` 不会复制或启动它。
+
 > 怎么在新项目里调用这套设计语言（开新项目 / 接已有项目 / 喂 AI / 交付前审稿）见 **[USAGE.md](USAGE.md)**。
 
 以后每次开新 UI 项目，先执行一次检查/注入：
@@ -90,8 +98,10 @@ design-language/
 ├── tailwind/
 │   └── theme.css          # Tailwind v4 @theme 映射（整体替换默认色板）
 ├── starter/               # ★ React 19 + Vite 6 + Tailwind v4 脚手架，复制即开新项目
-├── scripts/               # 字体工具链 + dl-apply 注入 CLI
-├── tests/                 # 文档镜像与 dl-apply 行为测试
+├── scripts/               # 字体工具链 + dl-apply + 可选 dl-preview CLI
+│   ├── dl-apply.sh        #   设计语言注入与严格检查
+│   └── dl-preview-cli.mjs #   loopback-only 预览选择入口，Node.js 22
+├── tests/                 # 文档镜像、dl-apply 与预览服务测试
 ├── openspec/              # 阶段变更的 proposal / design / spec / tasks
 ├── FONTS.md               # 字体来源与授权说明
 └── LICENSE                # MIT（代码），字体各自独立授权
@@ -112,7 +122,7 @@ design-language/
 
 方向不明确时，再要求 AI 按 `STYLE_PREVIEW.md` 生成风格试衣间：`design-previews/YYYY-MM-DD-任务名/index.html`，让用户从 3–4 个真实 mini mockup 中选择方向后再正式实现。
 
-第二阶段只提供静态文档与注入流程，不提供预览服务器、监听器或后台进程。`design-previews` 继续是可以直接打开、独立运行的静态自包含 HTML。
+`design-previews` 继续是跨平台可直接以 `file:` 打开、独立运行的静态自包含 HTML。可选持久 CLI 只支持 Linux/WSL2、Node.js 22 和功能正常的 `/proc/self/fd`，只从 design-language checkout 显式启动。服务固定监听 `127.0.0.1`，不提供 host、CORS、tunnel、proxy、daemon、watch、自动打开或 `sudo` 用法，也不属于 `dl-apply` 注入内容。完整命令、结果消费、关闭预算和临时文件剩余风险见 `USAGE.md`。
 
 ### 按任务选择可选模块
 

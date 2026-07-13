@@ -88,7 +88,15 @@ className="[transition:transform_var(--duration-quick)_var(--ease-signature)]"
 新项目的默认指导由 `.ai/DESIGN.md`、静态 `.ai/STYLE_PREVIEW.md` 和当前 `.ai/presets/<name>.md` 组成。生成 UI 时必读核心与 preset，方向不明确时再读 `STYLE_PREVIEW.md`。只有任务需要时，才额外读取 `.ai/references/` 中的 `ui-patterns`、`motion`、`data-vis` 或 `preferences` 对应文件。`preferences` 的实际记录写入项目根目录 `DESIGN_PREFERENCES.md`，不写进会被刷新替换的设计语言受管区块。
 这样 codex / gemini / claude 的输出会收敛到你的设计语言，而非 AI slop。
 
-starter 只携带静态文件，不包含或捆绑 `dl-apply`。第二阶段也没有预览服务器，`design-previews` 仍是静态、自包含 HTML。
+starter 只携带静态文件，不包含或捆绑 `dl-apply` 与预览选择服务，复制 starter 时也不会带走这些工具。`design-previews` 始终以跨平台 `file:` 静态、自包含 HTML 为默认，可直接打开。
+
+如需把选择写入 `selection.json`，必须另有 design-language checkout，并从 checkout 调用：
+
+```bash
+node ~/design-language/scripts/dl-preview-cli.mjs --port 0 [--exit-on-select] <preview-dir>
+```
+
+不要从复制后的 starter 猜测脚本路径，也不要让 `dl-apply` 启动服务。持久 CLI 仅支持 Linux/WSL2、Node.js 22 和功能正常的 `/proc/self/fd`，固定监听 `127.0.0.1`，没有 host、CORS、tunnel、proxy、daemon、watch、自动打开或 `sudo` 用法。它在访问用户预览根目录、监听、清理或写入前验证平台前置条件，失败只给私有启动错误。完整 manifest/DOM 契约、精确 `204`、session、`0600` 原子输出、关闭预算和临时文件剩余风险见 `.ai/STYLE_PREVIEW.md`。
 
 方向不明确时，再让 AI 读取 `.ai/STYLE_PREVIEW.md`，先在 `design-previews/YYYY-MM-DD-任务名/index.html` 做 3–4 个真实 mini mockup，并用中文三拨盘（视觉冒险度 / 动效强度 / 信息密度）让用户先看后选。
 
