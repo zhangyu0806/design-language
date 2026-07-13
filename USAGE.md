@@ -9,30 +9,49 @@
 已把仓库 clone 到本机（如 `~/design-language`）并软链 `scripts/dl-apply.sh` 到 `~/.local/bin/dl-apply` 后：
 
 ```bash
-dl-apply <项目目录> [preset]   # preset 默认 dark，可选 editorial/brutalist/warm/dark
-dl-apply .                     # 当前目录，dark preset
-dl-apply ~/my-app editorial    # 指定 preset
-dl-apply --check .             # 只检查当前项目是否已注入，不改文件
+dl-apply [options] <项目目录> [preset]
+
+dl-apply .                              # 兼容旧调用：当前目录，dark preset，无可选模块
+dl-apply ~/my-app editorial             # 兼容旧调用：指定 preset
+dl-apply --check .                      # 严格检查 dark + 无可选模块，不改文件
+dl-apply --modules ui-patterns,motion . editorial
+dl-apply . editorial --modules data-vis # 选项可放在位置参数前后
+dl-apply --modules=motion --modules preferences . warm
+dl-apply -- ./-project dark             # -- 后内容只按位置参数解释
 ```
 
-它把 `DESIGN.md`（全局 DNA + NEVERS）+ `STYLE_PREVIEW.md`（风格试衣间）+ `presets/<preset>.md` 拼进项目的 `AGENTS.md`，
+旧语法 `dl-apply <目录> [preset]` 和 `dl-apply --check <目录> [preset]` 继续有效。preset 默认 `dark`。选项可出现在位置参数前后，`--` 会结束选项解析，适合目录名以 `-` 开头的情况。
+
+`--modules` 只接受 `ui-patterns`、`motion`、`data-vis`、`preferences`。值可用逗号分隔，也可重复传入；`--modules=value` 同样有效。重复 ID 会去重，最终始终按 `ui-patterns`、`motion`、`data-vis`、`preferences` 的规范顺序注入。
+
+它把核心 `DESIGN.md` + 默认 `STYLE_PREVIEW.md` + 显式选择的可选模块 + `presets/<preset>.md` 拼进项目的 `AGENTS.md`，
 放在 `<!-- BEGIN design-language -->` 标记区块内——**幂等**（重跑只刷新区块，不动你其他内容），
 **可切 preset**（换 preset 重跑即替换）。之后 AI 打开项目就读到你的设计语言，生成的 UI 收敛到你的风格。
+
+分层含义如下：
+
+- **核心层**：`DESIGN.md`，包含共享 DNA、NEVERS、三拨盘、规则优先级、Functional Contract 和最小交付门禁。
+- **默认层**：核心层加 `STYLE_PREVIEW.md` 和当前 preset。`STYLE_PREVIEW.md` 始终注入，不是可选模块。
+- **可选层**：四个 `references/` 模块，只在任务需要且调用者显式选择时注入。
+
+第二阶段没有预览服务器、监听器或后台进程。`design-previews/YYYY-MM-DD-任务名/index.html` 仍是静态、自包含 HTML，可直接用浏览器打开。
 
 以后每次开新 UI 项目，固定先跑：
 
 ```bash
-dl-apply --check . || dl-apply . editorial
+dl-apply --check . editorial || dl-apply . editorial
 ```
 
 完全新项目优先复制 `starter/`；已有项目或脚手架生成后的项目用 `dl-apply` 注入 `AGENTS.md`。
 
-涉及 UI / 视觉 / 页面重构时，要求 AI 先给三行短声明，再动代码：
+涉及 UI / 视觉 / 页面重构时，要求 AI 先给执行声明，再动代码：
 
 ```text
 Design read: 页面类型 / 目标用户 / preset / 明暗主题
+Functional contract: 页面为何存在 / 用户 3 秒内必须知道什么 / 必须完成什么动作
 Design risks: 任务胆量档位 / 本页面最容易滑向 AI slop 的 2–3 个风险
 Preflight target: 本次必须通过的 3–5 条审稿规则 / 是否需要两轮制
+Modules: 本次按需加载的模块 ID；没有则写“无”
 ```
 
 如果风格方向还没定，追加：
@@ -42,6 +61,49 @@ Style preview: 3–4 个方向 / 三拨盘初始值 / 是否生成 design-previe
 ```
 
 样式接入（tokens.css / theme.css）和字体仍按下面「场景 B」手动做一次；`dl-apply` 只负责喂 AI 那一层（最重要的一层）。风格试衣间只决定方向，正式实现仍必须走 `DESIGN.md` 的 token、状态、审稿门禁。
+
+### 严格 `--check` 与退出码
+
+`--check` 不只确认标记存在。它会逐字节比较唯一受管区块，检查 preset、规范化模块集合、模块顺序，以及当前上游的核心、风格预览、模块和 preset 内容。检查过程只读，不会修文件。
+
+严格 check 与 fallback apply 必须使用完全相同的 preset 和 `--modules`。例如带动效模块的 editorial 项目应写：
+
+```bash
+dl-apply --check . editorial --modules motion || dl-apply . editorial --modules motion
+```
+
+| 退出码 | 含义 |
+|---|---|
+| `0` | apply 成功，或 check 完全匹配 |
+| `1` | 参数、源文件、权限或标记结构错误，需要先处理原因 |
+| `2` | check 发现区块缺失或内容不匹配，可用对应 apply 刷新 |
+
+标记只有一边、顺序颠倒、重复或出现多个区块时，apply 和 check 都返回 `1`。脚本不会猜测修复方式，也不会写入文件，请人工修复 `AGENTS.md` 的标记结构后再运行。
+
+安全边界：`dl-apply` 只适用于由当前用户拥有的可信项目目录，不要用 `sudo` 运行，也不要在其他用户可并发替换文件的目录中运行。刷新现有 `AGENTS.md` 时只承诺保留文本、inode 不变场景和 Unix mode bits；ACL、xattr、SELinux label 等扩展元数据不属于跨平台契约。
+
+不带 `--modules` 的 apply 代表期望模块集合为空，会刷新受管区块并移除以前由 `dl-apply` 注入的可选模块：
+
+```bash
+dl-apply --modules motion,data-vis . dark
+dl-apply . dark                         # 保留核心、STYLE_PREVIEW、dark preset，移除两个模块
+```
+
+### 按任务选模块
+
+```bash
+# 复杂设置流程，需要入口、状态、恢复和退出路径
+dl-apply --modules ui-patterns ./settings-app editorial
+
+# 产品交互动效，需要可中断、空间来源和 reduced motion 规则
+dl-apply --modules motion ./product warm
+
+# 数据仪表盘，同时需要功能流程和数据表达
+dl-apply --modules data-vis,ui-patterns ./dashboard dark
+
+# 项目已经有用户确认的长期偏好，需要可追溯治理模板
+dl-apply --modules preferences ./brand-site editorial
+```
 
 首次安装软链：
 ```bash
@@ -91,15 +153,20 @@ bun install && bun run dev
 ```bash
 cat design-language/starter/.ai/DESIGN.md \
     design-language/starter/.ai/STYLE_PREVIEW.md \
+    design-language/starter/.ai/references/UI_PATTERNS.md \
     design-language/starter/.ai/presets/editorial.md \
     > /tmp/design-language-context.md
 # 检查后，把内容追加到 CLAUDE.md / .cursorrules / AGENTS.md 的明确标记区块内
 ```
 
-> `DESIGN.md` = 全局 DNA + Nevers 清单；`presets/<name>.md` = 当前选用风格。
+> `DESIGN.md` = 核心契约；`STYLE_PREVIEW.md` = 默认静态风格试衣间协议；`presets/<name>.md` = 当前选用风格；`references/*.md` = 只按任务加入的可选参考。上例主动加入了 `ui-patterns`，不是默认内容。
 > 这一步比接样式还重要——它决定 AI 生成的 UI 是「你的风格」还是「AI 均值」。
 
+`preferences` 模块只提供治理规则与空模板。实际偏好统一写入目标项目根目录的 `DESIGN_PREFERENCES.md`，不要写在 `AGENTS.md` 的 design-language 受管区块内；重跑 `dl-apply` 会刷新受管区块，但不会管理或覆盖该项目文件。
+
 ### 第二步：接入样式
+
+`dl-apply` 和 starter 文档不会自动改项目样式。CSS token、Tailwind 映射和字体接入仍需按项目路径手动完成。
 
 主 CSS 入口加三行（路径按实际调整）：
 

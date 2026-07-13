@@ -6,8 +6,10 @@
 
 - **共享 DNA**：间距节奏、圆角哲学、动效缓动、排版逻辑、Nevers 清单、页面级反 slop 审稿 —— 所有项目恒定不变，这是辨识度来源。
 - **4 套 Preset**：`editorial` / `brutalist` / `warm` / `dark` —— 按项目情形切换表层（颜色/字体/质感），每套含亮/暗双主题。
-- **AI 交付门禁**：生成 UI 前先做 `Design read / Design risks / Preflight target`，交付前再用反 slop 清单审首屏、节奏、视觉资产、状态与文案。
-- **风格试衣间**：方向不明确时先产出 `design-previews/YYYY-MM-DD-任务名/index.html`，用 3–4 个真实 mini mockup 和中文三拨盘让用户先看后选。
+- **三层指导**：核心层 `DESIGN.md` 管所有项目的共同契约；默认层再加入静态 `STYLE_PREVIEW.md` 与当前 preset；可选层按任务加载专项参考，不塞进每个项目。
+- **4 个可选模块**：`ui-patterns` / `motion` / `data-vis` / `preferences`，必须通过 `dl-apply --modules` 显式选择，不会默认加载。
+- **AI 交付门禁**：生成 UI 前先做 `Design read / Functional contract / Design risks / Preflight target / Modules`，交付前再用反 slop 清单审首屏、节奏、视觉资产、状态与文案。
+- **风格试衣间**：方向不明确时先产出 `design-previews/YYYY-MM-DD-任务名/index.html`，用 3–4 个真实 mini mockup 和中文三拨盘让用户先看后选。第二阶段没有预览服务器，`design-previews` 仍是静态、自包含 HTML。
 - **Redesign Audit**：接已有项目时先输出 `Mode / Problems / Plan / Do not change`，保住业务信息、品牌资产和信息架构，不让 AI 为了“变好看”乱改内容。
 - **机制吸收，不照抄**：吸收优秀 design skill 的任务分档、两轮审稿、确定性检测、动效工艺；不照搬评分、品牌话术或另一套审美。
 
@@ -54,7 +56,8 @@ cd starter && bun install && bun run dev
 以后每次开新 UI 项目，先执行一次检查/注入：
 
 ```bash
-dl-apply --check . || dl-apply . editorial
+dl-apply --check . editorial || dl-apply . editorial
+dl-apply --modules ui-patterns,motion . editorial
 ```
 
 完全新项目优先复制 `starter/`；已有项目或脚手架生成后的项目用 `dl-apply` 注入 `AGENTS.md`。
@@ -77,12 +80,19 @@ design-language/
 │   ├── brutalist.md
 │   ├── warm.md
 │   └── dark.md
+├── references/             # ★ 按任务显式加载的可选模块
+│   ├── UI_PATTERNS.md      #   ui-patterns：复杂组件、任务流、状态恢复
+│   ├── MOTION.md           #   motion：动效目的、空间关系、中断与降级
+│   ├── DATA_VIS.md         #   data-vis：图表选择、尺度、口径与可访问性
+│   └── PREFERENCES.md      #   preferences：项目偏好记录与治理模板
 ├── css/
 │   └── tokens.css         # ★ 可直接用：CSS 变量 + data-preset 切换 + 明暗
 ├── tailwind/
 │   └── theme.css          # Tailwind v4 @theme 映射（整体替换默认色板）
 ├── starter/               # ★ React 19 + Vite 6 + Tailwind v4 脚手架，复制即开新项目
-├── scripts/               # 字体下载 + subset 工具链（fetch-fonts.sh）
+├── scripts/               # 字体工具链 + dl-apply 注入 CLI
+├── tests/                 # 文档镜像与 dl-apply 行为测试
+├── openspec/              # 阶段变更的 proposal / design / spec / tasks
 ├── FONTS.md               # 字体来源与授权说明
 └── LICENSE                # MIT（代码），字体各自独立授权
 ```
@@ -92,13 +102,30 @@ design-language/
 ### 1. 喂给 AI（核心价值）
 在项目里新建 `CLAUDE.md` / `.cursorrules` / codex 上下文，放入：
 - `DESIGN.md` 全文（或其压缩版）
+- `STYLE_PREVIEW.md`（默认层，始终保留）
 - 当前项目选用的 `presets/<name>.md`
+- 当前任务需要的 `references/*.md`，没有对应需求就不加载
 
 这样 AI 的"最可能输出"就从语料均值变成「我的 DNA + 当前 preset」。
 
-生成或重构 UI 时，先要求 AI 给三行短声明：`Design read` / `Design risks` / `Preflight target`；交付前再按 `DESIGN.md` 的页面级反 slop 清单审首屏、section 节奏、视觉资产、状态、文案。
+生成或重构 UI 时，先要求 AI 给出 `Design read` / `Functional contract` / `Design risks` / `Preflight target` / `Modules` 执行声明；交付前再按 `DESIGN.md` 的页面级反 slop 清单审首屏、section 节奏、视觉资产、状态、文案。
 
 方向不明确时，再要求 AI 按 `STYLE_PREVIEW.md` 生成风格试衣间：`design-previews/YYYY-MM-DD-任务名/index.html`，让用户从 3–4 个真实 mini mockup 中选择方向后再正式实现。
+
+第二阶段只提供静态文档与注入流程，不提供预览服务器、监听器或后台进程。`design-previews` 继续是可以直接打开、独立运行的静态自包含 HTML。
+
+### 按任务选择可选模块
+
+| 任务 | 模块 | 示例 |
+|---|---|---|
+| 复杂表单、设置流程、恢复路径 | `ui-patterns` | `dl-apply --modules ui-patterns . editorial` |
+| 展开、转场、拖拽、reduced motion | `motion` | `dl-apply . editorial --modules motion` |
+| 仪表盘、图表、指标与趋势 | `data-vis` | `dl-apply --modules=data-vis . dark` |
+| 记录项目内已确认的长期偏好 | `preferences` | `dl-apply --modules preferences . warm`；实际记录写入项目 `DESIGN_PREFERENCES.md` |
+
+多个模块可用逗号或重复选项指定。无论输入顺序如何，注入顺序固定为 `ui-patterns`、`motion`、`data-vis`、`preferences`。
+
+`dl-apply` 应由项目文件所有者在可信目录中运行，不要配合 `sudo` 使用；完整安全边界和退出码见 `USAGE.md`。
 
 ### 2. 接入样式
 ```css
