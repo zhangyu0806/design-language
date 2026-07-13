@@ -25,10 +25,14 @@ jobs:
       - name: Export and verify pinned Google Chrome
         run: |
           CHROME_PATH='${{ steps.chrome.outputs.chrome-path }}'
+          REQUIRED_CHROME_VERSION='144.0.7559.109'
           chrome_version="$("$CHROME_PATH" --version)"
           chrome_version="${chrome_version#"${chrome_version%%[![:space:]]*}"}"
           chrome_version="${chrome_version%"${chrome_version##*[![:space:]]}"}"
-          test "$chrome_version" = 'Google Chrome 144.0.7559.109'
+          case "$chrome_version" in
+            "Google Chrome $REQUIRED_CHROME_VERSION"|"Google Chrome for Testing $REQUIRED_CHROME_VERSION") ;;
+            *) exit 1 ;;
+          esac
           printf 'CHROME_PATH=%s\n' "$CHROME_PATH" >> "$GITHUB_ENV"
 
       - name: Verify design contracts and dl-apply
