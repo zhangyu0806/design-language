@@ -8,3 +8,5 @@ node_modules/
 dist/
 .venv/
 graphify-out/cache/
+__pycache__/
+*.pyc
