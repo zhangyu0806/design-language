@@ -61,7 +61,6 @@ async function main() {
     process.exitCode = 1;
     return;
   }
-  output({ event: "ready", url: `http://${preview.host}:${preview.port}/`, host: preview.host, port: preview.port, output: "selection.json", session: preview.session });
   let stopping = false;
   const stop = async (code) => {
     if (stopping) return;
@@ -71,6 +70,7 @@ async function main() {
   };
   process.once("SIGINT", () => { void stop(130); });
   process.once("SIGTERM", () => { void stop(143); });
+  output({ event: "ready", url: `http://${preview.host}:${preview.port}/`, host: preview.host, port: preview.port, output: "selection.json", session: preview.session });
   if (options.exitOnSelect) await preview.completion;
 }
 

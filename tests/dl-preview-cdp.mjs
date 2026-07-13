@@ -8,8 +8,13 @@ import { promisify } from "node:util";
 import { signalChromeGroup, waitForChromeGroupExit } from "./dl-preview-chrome-process.mjs";
 
 const executeFile = promisify(execFile);
-const REQUIRED_CHROME_VERSION = "Google Chrome 144.0.7559.109";
+const REQUIRED_CHROME_VERSION = "144.0.7559.109";
+const REQUIRED_CHROME_NAMES = new Set([`Google Chrome ${REQUIRED_CHROME_VERSION}`, `Google Chrome for Testing ${REQUIRED_CHROME_VERSION}`]);
 const COMMAND_TIMEOUT_MS = 10_000;
+
+export function isRequiredChromeVersion(version) {
+  return REQUIRED_CHROME_NAMES.has(version.trim());
+}
 
 class CdpError extends Error {
   constructor(message, details = {}) {
@@ -30,14 +35,14 @@ function abortError(signal) {
 
 async function chromePath() {
   const path = process.env.CHROME_PATH;
-  if (path === undefined || path.length === 0) throw new CdpError("CHROME_PATH must name Google Chrome 144.0.7559.109");
+  if (path === undefined || path.length === 0) throw new CdpError(`CHROME_PATH must name Chrome ${REQUIRED_CHROME_VERSION}`);
   let stdout;
   try {
     ({ stdout } = await executeFile(path, ["--version"]));
   } catch (error) {
     throw new CdpError("CHROME_PATH is not executable", { cause: error });
   }
-  if (stdout.trim() !== REQUIRED_CHROME_VERSION) throw new CdpError(`Chrome version mismatch: ${stdout.trim()}`);
+  if (!isRequiredChromeVersion(stdout)) throw new CdpError(`Chrome version mismatch: ${stdout.trim()}`);
   return path;
 }
 

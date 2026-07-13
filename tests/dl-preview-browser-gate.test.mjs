@@ -6,10 +6,18 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 
+import { isRequiredChromeVersion } from "./dl-preview-cdp.mjs";
 import { chromeGroupExists, signalChromeGroup } from "./dl-preview-chrome-process.mjs";
 
 const fixture = new URL("./fixtures/dl-preview-browser-gate-child.mjs", import.meta.url);
 const ABORT_MARKER = "DL_PREVIEW_BROWSER_GATE_ABORTED";
+
+test("Chrome gate accepts stable and for-testing names only at the pinned version", () => {
+  assert.equal(isRequiredChromeVersion("Google Chrome 144.0.7559.109"), true);
+  assert.equal(isRequiredChromeVersion("Google Chrome for Testing 144.0.7559.109"), true);
+  assert.equal(isRequiredChromeVersion("Google Chrome for Testing 144.0.7559.110"), false);
+  assert.equal(isRequiredChromeVersion("Chromium 144.0.7559.109"), false);
+});
 
 async function processGroupFrom(child, processGroupFile) {
   if (child.browserProcessGroup !== undefined) return child.browserProcessGroup;
