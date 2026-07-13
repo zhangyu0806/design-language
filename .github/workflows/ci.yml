@@ -12,13 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Verify design docs are synced
+      - name: Verify design contracts and dl-apply
         run: |
-          cmp DESIGN.md starter/.ai/DESIGN.md
-          cmp STYLE_PREVIEW.md starter/.ai/STYLE_PREVIEW.md
-          for preset in editorial brutalist warm dark; do
-            cmp "presets/${preset}.md" "starter/.ai/presets/${preset}.md"
-          done
+          bash -n scripts/dl-apply.sh scripts/dl-apply-registry.sh tests/*.sh
+          bash tests/run.sh
 
       - uses: oven-sh/setup-bun@v2
         with:
