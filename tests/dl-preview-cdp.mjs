@@ -155,6 +155,13 @@ function createTransport(child) {
   return Object.freeze({ events, send, waitFor, rejectPending });
 }
 
+export async function resolvePageTarget(transport, targetInfos) {
+  const page = targetInfos.find(({ type }) => type === "page");
+  if (page !== undefined) return page.targetId;
+  const { targetId } = await transport.send("Target.createTarget", { url: "about:blank" });
+  return targetId;
+}
+
 async function stopChrome(child, profile, transport, graceful) {
   transport.rejectPending(new CdpError("Chrome closing"));
   if (graceful && child.exitCode === null && child.signalCode === null) {
@@ -202,7 +209,6 @@ export async function launchChrome(url, options = {}) {
     "--no-default-browser-check",
     "--disable-background-networking",
     "--disable-component-update",
-    "about:blank",
   ], { detached: true, stdio: ["ignore", "ignore", "pipe", "pipe", "pipe"] });
   child.stderr.resume();
   const transport = createTransport(child);
@@ -211,12 +217,15 @@ export async function launchChrome(url, options = {}) {
   try {
     options.onSpawn?.(child.pid);
     const targets = await transport.send("Target.getTargets");
-    const page = targets.targetInfos.find(({ type }) => type === "page");
-    if (page === undefined) throw new CdpError("Chrome created no page target");
-    ({ sessionId } = await transport.send("Target.attachToTarget", { targetId: page.targetId, flatten: true }));
+    const targetId = await resolvePageTarget(transport, targets.targetInfos);
+    ({ sessionId } = await transport.send("Target.attachToTarget", { targetId, flatten: true }));
     const command = (method, params = {}, options = {}) => transport.send(method, params, { ...options, sessionId });
-    await Promise.all(["Page.enable", "Runtime.enable", "Network.enable", "Log.enable"].map((method) => command(method)));
-    const after = transport.events.length;
+    await command("Page.enable");
+    let after = transport.events.length;
+    await command("Page.navigate", { url: "about:blank" });
+    await transport.waitFor("Page.frameNavigated", ({ frame }) => frame.url === "about:blank", { after, sessionId });
+    await Promise.all(["Runtime.enable", "Network.enable", "Log.enable"].map((method) => command(method)));
+    after = transport.events.length;
     await command("Page.navigate", { url });
     await transport.waitFor("Page.loadEventFired", () => true, { after, sessionId });
     return Object.freeze({

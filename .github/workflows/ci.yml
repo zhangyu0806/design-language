@@ -22,10 +22,27 @@ jobs:
         with:
           chrome-version: 144.0.7559.109
 
-      - name: Export and verify pinned Google Chrome
+      - name: Secure and verify pinned Google Chrome for Testing
+        env:
+          CHROME_ACTION_PATH: ${{ steps.chrome.outputs.chrome-path }}
         run: |
-          CHROME_PATH='${{ steps.chrome.outputs.chrome-path }}'
+          set -euo pipefail
+          CHROME_PATH="$(readlink -f "$CHROME_ACTION_PATH")"
+          EXPECTED_CHROME_PATH='/opt/hostedtoolcache/setup-chrome/chrome/144.0.7559.109/x64/chrome'
           REQUIRED_CHROME_VERSION='144.0.7559.109'
+          if [[ "$CHROME_PATH" != "$EXPECTED_CHROME_PATH" ]]; then
+            printf 'Unexpected Chrome for Testing path: %s\n' "$CHROME_PATH" >&2
+            exit 1
+          fi
+          sudo tee /etc/apparmor.d/design-language-cft-144 >/dev/null <<'EOF'
+          abi <abi/4.0>,
+          include <tunables/global>
+
+          profile design-language-cft-144 /opt/hostedtoolcache/setup-chrome/chrome/144.0.7559.109/x64/chrome flags=(unconfined) {
+            userns,
+          }
+          EOF
+          sudo apparmor_parser -r /etc/apparmor.d/design-language-cft-144
           chrome_version="$("$CHROME_PATH" --version)"
           chrome_version="${chrome_version#"${chrome_version%%[![:space:]]*}"}"
           chrome_version="${chrome_version%"${chrome_version##*[![:space:]]}"}"

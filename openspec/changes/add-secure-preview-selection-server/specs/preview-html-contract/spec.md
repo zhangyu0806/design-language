@@ -91,12 +91,17 @@ manifest、DOM、session、网络或 API 失败时，页面 MUST 保持设计内
 
 ### Requirement: 真实 Chromium 回归必须证明浏览器契约
 
-仓库 MUST 拥有真实 Chromium E2E，并 MUST 在本地标准测试入口与 CI 中执行。E2E MUST 覆盖 `file:` 静态模式、官方回环服务模式、malformed manifest 零副作用、精确 `204` response 消费以及选择后的可见状态。HTML 发现测试 MUST 以真实 Chrome 做差分基准，证明 manifest `id`、`type` 和 MathML `annotation-xml[encoding]` 按浏览器 tokenizer 行为解码字符引用后比较，同时证明 JSON script text 从不做 entity 解码。测试 MUST 分开提供网络诊断控制与浏览器门禁元控制。fetch-abort 网络诊断控制 MUST 在真实 Chrome 中确认被中止请求产生对应的 `Network.loadingFailed`，它 MUST NOT 被当作浏览器门禁失败证明。浏览器门禁元控制 MUST 由外层测试运行正常和中止两个内层子进程场景；两者 MUST 调用同一个实际生产预览 E2E helper 与流程，启动生产 CLI、加载符合契约的 HTML、等待 session 与 DOM ready，并通过真实页面交互发出实际选择 POST。正常内层 MUST 继续观察精确 `204`、对应的 `Network.loadingFinished`、页面成功状态和 mode `0600` 的持久化结果，再以 `0` 退出。中止内层 MUST 在同一实际选择请求触发 `Network.requestWillBeSent` 后，通过测试层 `Fetch` pause 保持请求，再杀死 Chrome，并以非零状态退出。通用 data URL、孤立 CDP promise 或绕过生产 CLI/bootstrap 的合成请求 MUST NOT 充当元控制。外层测试 MUST 仅在正常内层为零且中止内层为非零时通过。Chrome/Chromium MUST 只作为测试基础设施，MUST NOT 成为预览页或服务的运行时 npm 依赖。
+仓库 MUST 拥有真实 Chromium E2E，并 MUST 在本地标准测试入口与 CI 中执行。E2E MUST 覆盖 `file:` 静态模式、官方回环服务模式、malformed manifest 零副作用、精确 `204` response 消费以及选择后的可见状态。HTML 发现测试 MUST 以真实 Chrome 做差分基准，证明 manifest `id`、`type` 和 MathML `annotation-xml[encoding]` 按浏览器 tokenizer 行为解码字符引用后比较，同时证明 JSON script text 从不做 entity 解码。测试 MUST 分开提供网络诊断控制与浏览器门禁元控制。fetch-abort 网络诊断控制 MUST 在真实 Chrome 中确认被中止请求产生对应的 `Network.loadingFailed`，它 MUST NOT 被当作浏览器门禁失败证明。浏览器门禁元控制 MUST 由外层测试运行正常和中止两个内层子进程场景；两者 MUST 调用同一个实际生产预览 E2E helper 与流程，启动生产 CLI、加载符合契约的 HTML、等待 session 与 DOM ready，并通过真实页面交互发出实际选择 POST。正常内层 MUST 继续观察精确 `204`、对应的 `Network.loadingFinished`、页面成功状态和 mode `0600` 的持久化结果，再以 `0` 退出。中止内层 MUST 在同一实际选择请求触发 `Network.requestWillBeSent` 后，通过测试层 `Fetch` pause 保持请求，再杀死 Chrome，并以非零状态退出。通用 data URL、孤立 CDP promise 或绕过生产 CLI/bootstrap 的合成请求 MUST NOT 充当元控制。外层测试 MUST 仅在正常内层为零且中止内层为非零时通过。Chrome/Chromium MUST 只作为测试基础设施，MUST NOT 成为预览页或服务的运行时 npm 依赖。Ubuntu 24.04 CI MUST 将 action 输出经 `readlink -f` 解析并精确匹配 `/opt/hostedtoolcache/setup-chrome/chrome/144.0.7559.109/x64/chrome`，再为该无通配符的唯一可执行路径加载仅含 `userns` 权限的专用 AppArmor profile，保持 Chrome sandbox 启用；MUST NOT 使用 `--no-sandbox`、setuid helper、全局 AppArmor userns sysctl 降级、禁用 AppArmor 或宽路径规则。
 
 #### Scenario: 本地和 CI 执行浏览器门禁
 
 - **WHEN** 维护者运行本地标准测试入口，或 CI 执行变更门禁
 - **THEN** 仓库自有 E2E 启动真实 Chromium 并完成静态与服务场景，未安装或未启动浏览器不得被当作通过
+
+#### Scenario: Ubuntu 24.04 运行下载版 Chrome for Testing
+
+- **WHEN** CI 使用 action 下载的固定 CfT 144.0.7559.109 执行真实浏览器门禁
+- **THEN** CI 只对解析并验证后的精确可执行路径授予 AppArmor `userns`，Chrome sandbox 保持启用；路径漂移或需要全局安全降级时门禁失败
 
 #### Scenario: fetch-abort 只证明网络监控有效
 

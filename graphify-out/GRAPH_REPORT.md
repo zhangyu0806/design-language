@@ -1,12 +1,12 @@
 # Graph Report - .  (2026-07-14)
 
 ## Corpus Check
-- 32 files · ~49,997 words
+- 33 files · ~50,354 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 191 nodes · 291 edges · 20 communities detected
-- Extraction: 89% EXTRACTED · 11% INFERRED · 0% AMBIGUOUS · INFERRED: 32 edges (avg confidence: 0.8)
+- 193 nodes · 295 edges · 20 communities detected
+- Extraction: 89% EXTRACTED · 11% INFERRED · 0% AMBIGUOUS · INFERRED: 33 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
@@ -37,11 +37,11 @@
 3. `discoverPreviewManifestSource()` - 10 edges
 4. `startPreviewBrowserScenario()` - 10 edges
 5. `readTag()` - 7 edges
-6. `notFound()` - 6 edges
-7. `verifyProcFd()` - 6 edges
-8. `parsePreviewManifest()` - 6 edges
-9. `send()` - 6 edges
-10. `Element` - 6 edges
+6. `send()` - 7 edges
+7. `launchChrome()` - 7 edges
+8. `notFound()` - 6 edges
+9. `verifyProcFd()` - 6 edges
+10. `parsePreviewManifest()` - 6 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `parsePreviewManifest()` --calls--> `parserAccepts()`  [INFERRED]
@@ -59,39 +59,39 @@
 
 ### Community 0 - "Community 0"
 Cohesion: 0.08
-Nodes (15): makePreviewFixture(), manifestHtml(), validSelection(), createSelectionStore(), deferred(), fakeStore(), manualCheckpoint(), storeSelection() (+7 more)
+Nodes (4): makePreviewFixture(), manifestHtml(), parserAccepts(), startFixture()
 
 ### Community 1 - "Community 1"
-Cohesion: 0.14
-Nodes (17): createPreviewLifecycle(), assertPreviewServerPlatform(), contained(), notFound(), openStaticAsset(), parsePathname(), PathError, protectedCanonicalPath() (+9 more)
+Cohesion: 0.15
+Nodes (14): createPreviewLifecycle(), cleanupStaleSelectionTemps(), createSession(), dialRecord(), exactKeys(), fail(), parseManifestDocument(), parsePreviewManifest() (+6 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.16
-Nodes (12): runInner(), watchdog(), abortChrome(), CdpError, chromePath(), createTransport(), isRequiredChromeVersion(), launchChrome() (+4 more)
+Cohesion: 0.14
+Nodes (15): runInner(), watchdog(), abortChrome(), CdpError, chromePath(), createTransport(), isRequiredChromeVersion(), launchChrome() (+7 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.18
 Nodes (13): onChromeRunning(), onPreviewReady(), report(), assertHealthy(), assertSelectionTrace(), closeBrowserFixture(), fillAndChoose(), fixtureHtml() (+5 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.21
-Nodes (9): parserAccepts(), dialRecord(), exactKeys(), fail(), parseManifestDocument(), parsePreviewManifest(), parseSelection(), plainRecord() (+1 more)
+Cohesion: 0.13
+Nodes (10): validSelection(), createSelectionStore(), deferred(), fakeStore(), manualCheckpoint(), storeSelection(), flushReport(), report() (+2 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.35
 Nodes (13): asciiLower(), commentEnd(), decodeAttributeValue(), discoverPreviewManifestSource(), integrationMode(), isAsciiLetter(), isSpace(), popForeign() (+5 more)
 
 ### Community 6 - "Community 6"
+Cohesion: 0.32
+Nodes (11): assertPreviewServerPlatform(), contained(), notFound(), openStaticAsset(), parsePathname(), PathError, protectedCanonicalPath(), readOnlyFlags() (+3 more)
+
+### Community 7 - "Community 7"
 Cohesion: 0.18
 Nodes (3): browserFixture(), Element, statusNode()
 
-### Community 7 - "Community 7"
+### Community 8 - "Community 8"
 Cohesion: 0.27
 Nodes (8): ProtocolError, rawValues(), reject(), sendError(), sendJson(), validateAuthority(), validateSelectionHeaders(), methodError()
-
-### Community 8 - "Community 8"
-Cohesion: 0.29
-Nodes (0):
 
 ### Community 9 - "Community 9"
 Cohesion: 0.6
@@ -158,12 +158,12 @@ Nodes (0):
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `startPreviewServer()` connect `Community 1` to `Community 0`, `Community 10`, `Community 4`?**
-  _High betweenness centrality (0.178) - this node is a cross-community bridge._
-- **Why does `parsePreviewManifest()` connect `Community 4` to `Community 1`, `Community 5`?**
-  _High betweenness centrality (0.127) - this node is a cross-community bridge._
+- **Why does `startPreviewServer()` connect `Community 1` to `Community 0`, `Community 10`, `Community 4`, `Community 6`?**
+  _High betweenness centrality (0.176) - this node is a cross-community bridge._
+- **Why does `parsePreviewManifest()` connect `Community 1` to `Community 0`, `Community 5`?**
+  _High betweenness centrality (0.128) - this node is a cross-community bridge._
 - **Why does `startFixture()` connect `Community 0` to `Community 1`?**
-  _High betweenness centrality (0.112) - this node is a cross-community bridge._
+  _High betweenness centrality (0.111) - this node is a cross-community bridge._
 - **Are the 10 inferred relationships involving `startPreviewServer()` (e.g. with `verifyProcFd()` and `resolvePreviewRoot()`) actually correct?**
   _`startPreviewServer()` has 10 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 3 inferred relationships involving `openStaticAsset()` (e.g. with `open()` and `serveStatic()`) actually correct?**

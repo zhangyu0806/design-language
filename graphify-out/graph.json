@@ -117,7 +117,7 @@
       "source_file": "scripts/dl-preview-paths.mjs",
       "source_location": "L1",
       "id": "scripts_dl_preview_paths_mjs",
-      "community": 1,
+      "community": 6,
       "norm_label": "dl-preview-paths.mjs"
     },
     {
@@ -126,7 +126,7 @@
       "source_file": "scripts/dl-preview-paths.mjs",
       "source_location": "L27",
       "id": "dl_preview_paths_patherror",
-      "community": 1,
+      "community": 6,
       "norm_label": "patherror"
     },
     {
@@ -135,7 +135,7 @@
       "source_file": "scripts/dl-preview-paths.mjs",
       "source_location": "L28",
       "id": "dl_preview_paths_patherror_constructor",
-      "community": 1,
+      "community": 6,
       "norm_label": ".constructor()"
     },
     {
@@ -144,7 +144,7 @@
       "source_file": "scripts/dl-preview-paths.mjs",
       "source_location": "L34",
       "id": "dl_preview_paths_notfound",
-      "community": 1,
+      "community": 6,
       "norm_label": "notfound()"
     },
     {
@@ -153,7 +153,7 @@
       "source_file": "scripts/dl-preview-paths.mjs",
       "source_location": "L38",
       "id": "dl_preview_paths_assertpreviewserverplatform",
-      "community": 1,
+      "community": 6,
       "norm_label": "assertpreviewserverplatform()"
     },
     {
@@ -162,7 +162,7 @@
       "source_file": "scripts/dl-preview-paths.mjs",
       "source_location": "L42",
       "id": "dl_preview_paths_readonlyflags",
-      "community": 1,
+      "community": 6,
       "norm_label": "readonlyflags()"
     },
     {
@@ -171,7 +171,7 @@
       "source_file": "scripts/dl-preview-paths.mjs",
       "source_location": "L46",
       "id": "dl_preview_paths_verifyprocfd",
-      "community": 1,
+      "community": 6,
       "norm_label": "verifyprocfd()"
     },
     {
@@ -180,7 +180,7 @@
       "source_file": "scripts/dl-preview-paths.mjs",
       "source_location": "L71",
       "id": "dl_preview_paths_contained",
-      "community": 1,
+      "community": 6,
       "norm_label": "contained()"
     },
     {
@@ -189,7 +189,7 @@
       "source_file": "scripts/dl-preview-paths.mjs",
       "source_location": "L76",
       "id": "dl_preview_paths_protectedcanonicalpath",
-      "community": 1,
+      "community": 6,
       "norm_label": "protectedcanonicalpath()"
     },
     {
@@ -198,7 +198,7 @@
       "source_file": "scripts/dl-preview-paths.mjs",
       "source_location": "L85",
       "id": "dl_preview_paths_resolvepreviewroot",
-      "community": 1,
+      "community": 6,
       "norm_label": "resolvepreviewroot()"
     },
     {
@@ -207,7 +207,7 @@
       "source_file": "scripts/dl-preview-paths.mjs",
       "source_location": "L91",
       "id": "dl_preview_paths_parsepathname",
-      "community": 1,
+      "community": 6,
       "norm_label": "parsepathname()"
     },
     {
@@ -216,7 +216,7 @@
       "source_file": "scripts/dl-preview-paths.mjs",
       "source_location": "L109",
       "id": "dl_preview_paths_openstaticasset",
-      "community": 1,
+      "community": 6,
       "norm_label": "openstaticasset()"
     },
     {
@@ -261,7 +261,7 @@
       "source_file": "scripts/dl-preview-selection.mjs",
       "source_location": "L1",
       "id": "scripts_dl_preview_selection_mjs",
-      "community": 4,
+      "community": 1,
       "norm_label": "dl-preview-selection.mjs"
     },
     {
@@ -270,7 +270,7 @@
       "source_file": "scripts/dl-preview-selection.mjs",
       "source_location": "L15",
       "id": "dl_preview_selection_selectionerror",
-      "community": 4,
+      "community": 1,
       "norm_label": "selectionerror"
     },
     {
@@ -279,7 +279,7 @@
       "source_file": "scripts/dl-preview-selection.mjs",
       "source_location": "L16",
       "id": "dl_preview_selection_selectionerror_constructor",
-      "community": 4,
+      "community": 1,
       "norm_label": ".constructor()"
     },
     {
@@ -288,7 +288,7 @@
       "source_file": "scripts/dl-preview-selection.mjs",
       "source_location": "L22",
       "id": "dl_preview_selection_fail",
-      "community": 4,
+      "community": 1,
       "norm_label": "fail()"
     },
     {
@@ -297,7 +297,7 @@
       "source_file": "scripts/dl-preview-selection.mjs",
       "source_location": "L26",
       "id": "dl_preview_selection_plainrecord",
-      "community": 4,
+      "community": 1,
       "norm_label": "plainrecord()"
     },
     {
@@ -306,7 +306,7 @@
       "source_file": "scripts/dl-preview-selection.mjs",
       "source_location": "L30",
       "id": "dl_preview_selection_exactkeys",
-      "community": 4,
+      "community": 1,
       "norm_label": "exactkeys()"
     },
     {
@@ -315,7 +315,7 @@
       "source_file": "scripts/dl-preview-selection.mjs",
       "source_location": "L34",
       "id": "dl_preview_selection_dialrecord",
-      "community": 4,
+      "community": 1,
       "norm_label": "dialrecord()"
     },
     {
@@ -324,7 +324,7 @@
       "source_file": "scripts/dl-preview-selection.mjs",
       "source_location": "L38",
       "id": "dl_preview_selection_parsemanifestdocument",
-      "community": 4,
+      "community": 1,
       "norm_label": "parsemanifestdocument()"
     },
     {
@@ -333,7 +333,7 @@
       "source_file": "scripts/dl-preview-selection.mjs",
       "source_location": "L57",
       "id": "dl_preview_selection_parsepreviewmanifest",
-      "community": 4,
+      "community": 1,
       "norm_label": "parsepreviewmanifest()"
     },
     {
@@ -360,7 +360,7 @@
       "source_file": "scripts/dl-preview-selection.mjs",
       "source_location": "L72",
       "id": "dl_preview_selection_parseselection",
-      "community": 4,
+      "community": 1,
       "norm_label": "parseselection()"
     },
     {
@@ -369,7 +369,7 @@
       "source_file": "scripts/dl-preview-selection.mjs",
       "source_location": "L81",
       "id": "dl_preview_selection_createselectionstore",
-      "community": 0,
+      "community": 4,
       "norm_label": "createselectionstore()"
     },
     {
@@ -567,7 +567,7 @@
       "source_file": "scripts/dl-preview-server.mjs",
       "source_location": "L8",
       "id": "dl_preview_server_methoderror",
-      "community": 7,
+      "community": 8,
       "norm_label": "methoderror()"
     },
     {
@@ -630,7 +630,7 @@
       "source_file": "scripts/dl-preview-protocol.mjs",
       "source_location": "L1",
       "id": "scripts_dl_preview_protocol_mjs",
-      "community": 7,
+      "community": 8,
       "norm_label": "dl-preview-protocol.mjs"
     },
     {
@@ -639,7 +639,7 @@
       "source_file": "scripts/dl-preview-protocol.mjs",
       "source_location": "L10",
       "id": "dl_preview_protocol_protocolerror",
-      "community": 7,
+      "community": 8,
       "norm_label": "protocolerror"
     },
     {
@@ -648,7 +648,7 @@
       "source_file": "scripts/dl-preview-protocol.mjs",
       "source_location": "L11",
       "id": "dl_preview_protocol_protocolerror_constructor",
-      "community": 7,
+      "community": 8,
       "norm_label": ".constructor()"
     },
     {
@@ -657,7 +657,7 @@
       "source_file": "scripts/dl-preview-protocol.mjs",
       "source_location": "L18",
       "id": "dl_preview_protocol_reject",
-      "community": 7,
+      "community": 8,
       "norm_label": "reject()"
     },
     {
@@ -666,7 +666,7 @@
       "source_file": "scripts/dl-preview-protocol.mjs",
       "source_location": "L22",
       "id": "dl_preview_protocol_rawvalues",
-      "community": 7,
+      "community": 8,
       "norm_label": "rawvalues()"
     },
     {
@@ -675,7 +675,7 @@
       "source_file": "scripts/dl-preview-protocol.mjs",
       "source_location": "L31",
       "id": "dl_preview_protocol_validateauthority",
-      "community": 7,
+      "community": 8,
       "norm_label": "validateauthority()"
     },
     {
@@ -684,7 +684,7 @@
       "source_file": "scripts/dl-preview-protocol.mjs",
       "source_location": "L40",
       "id": "dl_preview_protocol_validateselectionheaders",
-      "community": 7,
+      "community": 8,
       "norm_label": "validateselectionheaders()"
     },
     {
@@ -693,7 +693,7 @@
       "source_file": "scripts/dl-preview-protocol.mjs",
       "source_location": "L53",
       "id": "dl_preview_protocol_readjsonbody",
-      "community": 7,
+      "community": 8,
       "norm_label": "readjsonbody()"
     },
     {
@@ -702,7 +702,7 @@
       "source_file": "scripts/dl-preview-protocol.mjs",
       "source_location": "L89",
       "id": "dl_preview_protocol_sendjson",
-      "community": 7,
+      "community": 8,
       "norm_label": "sendjson()"
     },
     {
@@ -711,7 +711,7 @@
       "source_file": "scripts/dl-preview-protocol.mjs",
       "source_location": "L95",
       "id": "dl_preview_protocol_senderror",
-      "community": 7,
+      "community": 8,
       "norm_label": "senderror()"
     },
     {
@@ -801,7 +801,7 @@
       "source_file": "tests/dl-preview-html-chrome.test.mjs",
       "source_location": "L1",
       "id": "tests_dl_preview_html_chrome_test_mjs",
-      "community": 4,
+      "community": 0,
       "norm_label": "dl-preview-html-chrome.test.mjs"
     },
     {
@@ -810,7 +810,7 @@
       "source_file": "tests/dl-preview-html-chrome.test.mjs",
       "source_location": "L33",
       "id": "dl_preview_html_chrome_test_html",
-      "community": 4,
+      "community": 0,
       "norm_label": "html()"
     },
     {
@@ -819,7 +819,7 @@
       "source_file": "tests/dl-preview-html-chrome.test.mjs",
       "source_location": "L37",
       "id": "dl_preview_html_chrome_test_browsercandidateexpression",
-      "community": 4,
+      "community": 0,
       "norm_label": "browsercandidateexpression()"
     },
     {
@@ -828,7 +828,7 @@
       "source_file": "tests/dl-preview-html-chrome.test.mjs",
       "source_location": "L41",
       "id": "dl_preview_html_chrome_test_browsermathexpression",
-      "community": 4,
+      "community": 0,
       "norm_label": "browsermathexpression()"
     },
     {
@@ -837,7 +837,7 @@
       "source_file": "tests/dl-preview-html-chrome.test.mjs",
       "source_location": "L45",
       "id": "dl_preview_html_chrome_test_browsermanifestexpression",
-      "community": 4,
+      "community": 0,
       "norm_label": "browsermanifestexpression()"
     },
     {
@@ -846,7 +846,7 @@
       "source_file": "tests/dl-preview-html-chrome.test.mjs",
       "source_location": "L49",
       "id": "dl_preview_html_chrome_test_parseraccepts",
-      "community": 4,
+      "community": 0,
       "norm_label": "parseraccepts()"
     },
     {
@@ -918,7 +918,7 @@
       "source_file": "tests/dl-preview-server.test.mjs",
       "source_location": "L26",
       "id": "dl_preview_server_test_request",
-      "community": 0,
+      "community": 2,
       "norm_label": "request()"
     },
     {
@@ -972,7 +972,7 @@
       "source_file": "tests/dl-preview-server.test.mjs",
       "source_location": "L169",
       "id": "dl_preview_server_test_open",
-      "community": 1,
+      "community": 6,
       "norm_label": "open()"
     },
     {
@@ -981,7 +981,7 @@
       "source_file": "tests/dl-preview-server.test.mjs",
       "source_location": "L347",
       "id": "dl_preview_server_test_send",
-      "community": 0,
+      "community": 2,
       "norm_label": "send()"
     },
     {
@@ -990,7 +990,7 @@
       "source_file": "tests/dl-preview-selection.test.mjs",
       "source_location": "L1",
       "id": "tests_dl_preview_selection_test_mjs",
-      "community": 0,
+      "community": 4,
       "norm_label": "dl-preview-selection.test.mjs"
     },
     {
@@ -999,7 +999,7 @@
       "source_file": "tests/dl-preview-selection.test.mjs",
       "source_location": "L13",
       "id": "dl_preview_selection_test_deferred",
-      "community": 0,
+      "community": 4,
       "norm_label": "deferred()"
     },
     {
@@ -1008,7 +1008,7 @@
       "source_file": "tests/dl-preview-selection.test.mjs",
       "source_location": "L19",
       "id": "dl_preview_selection_test_manualcheckpoint",
-      "community": 0,
+      "community": 4,
       "norm_label": "manualcheckpoint()"
     },
     {
@@ -1017,7 +1017,7 @@
       "source_file": "tests/dl-preview-selection.test.mjs",
       "source_location": "L34",
       "id": "dl_preview_selection_test_createfakeoperations",
-      "community": 0,
+      "community": 4,
       "norm_label": "createfakeoperations()"
     },
     {
@@ -1026,7 +1026,7 @@
       "source_file": "tests/dl-preview-selection.test.mjs",
       "source_location": "L104",
       "id": "dl_preview_selection_test_fakestore",
-      "community": 0,
+      "community": 4,
       "norm_label": "fakestore()"
     },
     {
@@ -1035,7 +1035,7 @@
       "source_file": "tests/dl-preview-selection.test.mjs",
       "source_location": "L110",
       "id": "dl_preview_selection_test_storeselection",
-      "community": 0,
+      "community": 4,
       "norm_label": "storeselection()"
     },
     {
@@ -1044,7 +1044,7 @@
       "source_file": "tests/dl-preview-selection.test.mjs",
       "source_location": "L114",
       "id": "dl_preview_selection_test_observed",
-      "community": 0,
+      "community": 4,
       "norm_label": "observed()"
     },
     {
@@ -1053,7 +1053,7 @@
       "source_file": "tests/dl-preview-selection.test.mjs",
       "source_location": "L119",
       "id": "dl_preview_selection_test_expectcheckpoint",
-      "community": 0,
+      "community": 4,
       "norm_label": "expectcheckpoint()"
     },
     {
@@ -1062,7 +1062,7 @@
       "source_file": "tests/dl-preview-selection.test.mjs",
       "source_location": "L131",
       "id": "dl_preview_selection_test_manifestscript",
-      "community": 0,
+      "community": 4,
       "norm_label": "manifestscript()"
     },
     {
@@ -1071,7 +1071,7 @@
       "source_file": "tests/dl-preview-selection.test.mjs",
       "source_location": "L135",
       "id": "dl_preview_selection_test_assertinvalidmanifesthtml",
-      "community": 0,
+      "community": 4,
       "norm_label": "assertinvalidmanifesthtml()"
     },
     {
@@ -1080,7 +1080,7 @@
       "source_file": "tests/dl-preview-cli.test.mjs",
       "source_location": "L1",
       "id": "tests_dl_preview_cli_test_mjs",
-      "community": 8,
+      "community": 0,
       "norm_label": "dl-preview-cli.test.mjs"
     },
     {
@@ -1089,7 +1089,7 @@
       "source_file": "tests/dl-preview-cli.test.mjs",
       "source_location": "L14",
       "id": "dl_preview_cli_test_spawncli",
-      "community": 8,
+      "community": 0,
       "norm_label": "spawncli()"
     },
     {
@@ -1098,7 +1098,7 @@
       "source_file": "tests/dl-preview-cli.test.mjs",
       "source_location": "L18",
       "id": "dl_preview_cli_test_collectipc",
-      "community": 8,
+      "community": 0,
       "norm_label": "collectipc()"
     },
     {
@@ -1107,7 +1107,7 @@
       "source_file": "tests/dl-preview-cli.test.mjs",
       "source_location": "L43",
       "id": "dl_preview_cli_test_watchdog",
-      "community": 8,
+      "community": 0,
       "norm_label": "watchdog()"
     },
     {
@@ -1116,7 +1116,7 @@
       "source_file": "tests/dl-preview-cli.test.mjs",
       "source_location": "L56",
       "id": "dl_preview_cli_test_requestoutcome",
-      "community": 8,
+      "community": 0,
       "norm_label": "requestoutcome()"
     },
     {
@@ -1125,7 +1125,7 @@
       "source_file": "tests/dl-preview-cli.test.mjs",
       "source_location": "L63",
       "id": "dl_preview_cli_test_firstjsonline",
-      "community": 8,
+      "community": 0,
       "norm_label": "firstjsonline()"
     },
     {
@@ -1134,7 +1134,7 @@
       "source_file": "tests/dl-preview-cli.test.mjs",
       "source_location": "L74",
       "id": "dl_preview_cli_test_postselection",
-      "community": 8,
+      "community": 0,
       "norm_label": "postselection()"
     },
     {
@@ -1170,7 +1170,7 @@
       "source_file": "tests/dl-preview-fixtures.mjs",
       "source_location": "L40",
       "id": "dl_preview_fixtures_validselection",
-      "community": 0,
+      "community": 4,
       "norm_label": "validselection()"
     },
     {
@@ -1179,7 +1179,7 @@
       "source_file": "tests/dl-preview-browser.test.mjs",
       "source_location": "L1",
       "id": "tests_dl_preview_browser_test_mjs",
-      "community": 2,
+      "community": 0,
       "norm_label": "dl-preview-browser.test.mjs"
     },
     {
@@ -1188,7 +1188,7 @@
       "source_file": "tests/dl-preview-client.test.mjs",
       "source_location": "L1",
       "id": "tests_dl_preview_client_test_mjs",
-      "community": 6,
+      "community": 7,
       "norm_label": "dl-preview-client.test.mjs"
     },
     {
@@ -1197,7 +1197,7 @@
       "source_file": "tests/dl-preview-client.test.mjs",
       "source_location": "L8",
       "id": "dl_preview_client_test_element",
-      "community": 6,
+      "community": 7,
       "norm_label": "element"
     },
     {
@@ -1206,7 +1206,7 @@
       "source_file": "tests/dl-preview-client.test.mjs",
       "source_location": "L9",
       "id": "dl_preview_client_test_element_constructor",
-      "community": 6,
+      "community": 7,
       "norm_label": ".constructor()"
     },
     {
@@ -1215,7 +1215,7 @@
       "source_file": "tests/dl-preview-client.test.mjs",
       "source_location": "L16",
       "id": "dl_preview_client_test_element_getattribute",
-      "community": 6,
+      "community": 7,
       "norm_label": ".getattribute()"
     },
     {
@@ -1224,7 +1224,7 @@
       "source_file": "tests/dl-preview-client.test.mjs",
       "source_location": "L17",
       "id": "dl_preview_client_test_element_setattribute",
-      "community": 6,
+      "community": 7,
       "norm_label": ".setattribute()"
     },
     {
@@ -1233,7 +1233,7 @@
       "source_file": "tests/dl-preview-client.test.mjs",
       "source_location": "L18",
       "id": "dl_preview_client_test_element_addeventlistener",
-      "community": 6,
+      "community": 7,
       "norm_label": ".addeventlistener()"
     },
     {
@@ -1242,7 +1242,7 @@
       "source_file": "tests/dl-preview-client.test.mjs",
       "source_location": "L19",
       "id": "dl_preview_client_test_element_click",
-      "community": 6,
+      "community": 7,
       "norm_label": ".click()"
     },
     {
@@ -1251,7 +1251,7 @@
       "source_file": "tests/dl-preview-client.test.mjs",
       "source_location": "L22",
       "id": "dl_preview_client_test_statusnode",
-      "community": 6,
+      "community": 7,
       "norm_label": "statusnode()"
     },
     {
@@ -1260,7 +1260,7 @@
       "source_file": "tests/dl-preview-client.test.mjs",
       "source_location": "L28",
       "id": "dl_preview_client_test_browserfixture",
-      "community": 6,
+      "community": 7,
       "norm_label": "browserfixture()"
     },
     {
@@ -1269,7 +1269,7 @@
       "source_file": "tests/dl-preview-client.test.mjs",
       "source_location": "L62",
       "id": "dl_preview_client_test_elementstate",
-      "community": 6,
+      "community": 7,
       "norm_label": "elementstate()"
     },
     {
@@ -1278,7 +1278,7 @@
       "source_file": "tests/dl-preview-client.test.mjs",
       "source_location": "L70",
       "id": "dl_preview_client_test_assertmalformedfixture",
-      "community": 6,
+      "community": 7,
       "norm_label": "assertmalformedfixture()"
     },
     {
@@ -1287,7 +1287,7 @@
       "source_file": "tests/dl-preview-client.test.mjs",
       "source_location": "L88",
       "id": "dl_preview_client_test_flushmicrotasks",
-      "community": 6,
+      "community": 7,
       "norm_label": "flushmicrotasks()"
     },
     {
@@ -1498,6 +1498,15 @@
       "norm_label": "startpreviewbrowserscenario()"
     },
     {
+      "label": "dl-preview-cdp.test.mjs",
+      "file_type": "code",
+      "source_file": "tests/dl-preview-cdp.test.mjs",
+      "source_location": "L1",
+      "id": "tests_dl_preview_cdp_test_mjs",
+      "community": 2,
+      "norm_label": "dl-preview-cdp.test.mjs"
+    },
+    {
       "label": "dl-preview-cdp.mjs",
       "file_type": "code",
       "source_file": "tests/dl-preview-cdp.mjs",
@@ -1570,10 +1579,19 @@
       "norm_label": "createtransport()"
     },
     {
-      "label": "stopChrome()",
+      "label": "resolvePageTarget()",
       "file_type": "code",
       "source_file": "tests/dl-preview-cdp.mjs",
       "source_location": "L158",
+      "id": "dl_preview_cdp_resolvepagetarget",
+      "community": 2,
+      "norm_label": "resolvepagetarget()"
+    },
+    {
+      "label": "stopChrome()",
+      "file_type": "code",
+      "source_file": "tests/dl-preview-cdp.mjs",
+      "source_location": "L165",
       "id": "dl_preview_cdp_stopchrome",
       "community": 2,
       "norm_label": "stopchrome()"
@@ -1582,7 +1600,7 @@
       "label": "abortChrome()",
       "file_type": "code",
       "source_file": "tests/dl-preview-cdp.mjs",
-      "source_location": "L181",
+      "source_location": "L188",
       "id": "dl_preview_cdp_abortchrome",
       "community": 2,
       "norm_label": "abortchrome()"
@@ -1591,7 +1609,7 @@
       "label": "launchChrome()",
       "file_type": "code",
       "source_file": "tests/dl-preview-cdp.mjs",
-      "source_location": "L194",
+      "source_location": "L201",
       "id": "dl_preview_cdp_launchchrome",
       "community": 2,
       "norm_label": "launchchrome()"
@@ -1683,7 +1701,7 @@
       "source_file": "tests/fixtures/dl-preview-signal-child.mjs",
       "source_location": "L1",
       "id": "tests_fixtures_dl_preview_signal_child_mjs",
-      "community": 0,
+      "community": 4,
       "norm_label": "dl-preview-signal-child.mjs"
     },
     {
@@ -1692,7 +1710,7 @@
       "source_file": "tests/fixtures/dl-preview-signal-child.mjs",
       "source_location": "L6",
       "id": "dl_preview_signal_child_report",
-      "community": 0,
+      "community": 4,
       "norm_label": "report()"
     },
     {
@@ -1701,7 +1719,7 @@
       "source_file": "tests/fixtures/dl-preview-signal-child.mjs",
       "source_location": "L10",
       "id": "dl_preview_signal_child_flushreport",
-      "community": 0,
+      "community": 4,
       "norm_label": "flushreport()"
     },
     {
@@ -1710,7 +1728,7 @@
       "source_file": "tests/fixtures/dl-preview-signal-child.mjs",
       "source_location": "L53",
       "id": "dl_preview_signal_child_storefactory",
-      "community": 0,
+      "community": 4,
       "norm_label": "storefactory()"
     },
     {
@@ -1719,7 +1737,7 @@
       "source_file": "tests/fixtures/dl-preview-signal-child.mjs",
       "source_location": "L77",
       "id": "dl_preview_signal_child_stop",
-      "community": 0,
+      "community": 4,
       "norm_label": "stop()"
     }
   ],
@@ -3853,6 +3871,18 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "tests/dl-preview-cdp.mjs",
+      "source_location": "L161",
+      "weight": 1.0,
+      "_src": "dl_preview_cdp_resolvepagetarget",
+      "_tgt": "dl_preview_server_test_send",
+      "source": "dl_preview_server_test_send",
+      "target": "dl_preview_cdp_resolvepagetarget"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "tests/dl-preview-cdp.mjs",
       "source_location": "L208",
       "weight": 1.0,
       "_src": "dl_preview_server_test_send",
@@ -4811,6 +4841,18 @@
     {
       "relation": "imports_from",
       "confidence": "EXTRACTED",
+      "source_file": "tests/dl-preview-cdp.test.mjs",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "tests_dl_preview_cdp_test_mjs",
+      "_tgt": "tests_dl_preview_cdp_mjs",
+      "source": "tests_dl_preview_cdp_test_mjs",
+      "target": "tests_dl_preview_cdp_mjs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
       "source_file": "tests/dl-preview-cdp.mjs",
       "source_location": "L8",
       "weight": 1.0,
@@ -4899,6 +4941,18 @@
       "source_location": "L158",
       "weight": 1.0,
       "_src": "tests_dl_preview_cdp_mjs",
+      "_tgt": "dl_preview_cdp_resolvepagetarget",
+      "source": "tests_dl_preview_cdp_mjs",
+      "target": "dl_preview_cdp_resolvepagetarget",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/dl-preview-cdp.mjs",
+      "source_location": "L165",
+      "weight": 1.0,
+      "_src": "tests_dl_preview_cdp_mjs",
       "_tgt": "dl_preview_cdp_stopchrome",
       "source": "tests_dl_preview_cdp_mjs",
       "target": "dl_preview_cdp_stopchrome",
@@ -4908,7 +4962,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "tests/dl-preview-cdp.mjs",
-      "source_location": "L181",
+      "source_location": "L188",
       "weight": 1.0,
       "_src": "tests_dl_preview_cdp_mjs",
       "_tgt": "dl_preview_cdp_abortchrome",
@@ -4920,7 +4974,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "tests/dl-preview-cdp.mjs",
-      "source_location": "L194",
+      "source_location": "L201",
       "weight": 1.0,
       "_src": "tests_dl_preview_cdp_mjs",
       "_tgt": "dl_preview_cdp_launchchrome",
@@ -4956,7 +5010,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "tests/dl-preview-cdp.mjs",
-      "source_location": "L195",
+      "source_location": "L202",
       "weight": 1.0,
       "_src": "dl_preview_cdp_launchchrome",
       "_tgt": "dl_preview_cdp_chromepath",
@@ -4968,7 +5022,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "tests/dl-preview-cdp.mjs",
-      "source_location": "L208",
+      "source_location": "L214",
       "weight": 1.0,
       "_src": "dl_preview_cdp_launchchrome",
       "_tgt": "dl_preview_cdp_createtransport",
@@ -4980,7 +5034,19 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "tests/dl-preview-cdp.mjs",
-      "source_location": "L191",
+      "source_location": "L220",
+      "weight": 1.0,
+      "_src": "dl_preview_cdp_launchchrome",
+      "_tgt": "dl_preview_cdp_resolvepagetarget",
+      "source": "dl_preview_cdp_resolvepagetarget",
+      "target": "dl_preview_cdp_launchchrome",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/dl-preview-cdp.mjs",
+      "source_location": "L198",
       "weight": 1.0,
       "_src": "dl_preview_cdp_abortchrome",
       "_tgt": "dl_preview_cdp_stopchrome",
@@ -4992,7 +5058,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "tests/dl-preview-cdp.mjs",
-      "source_location": "L259",
+      "source_location": "L268",
       "weight": 1.0,
       "_src": "dl_preview_cdp_launchchrome",
       "_tgt": "dl_preview_cdp_stopchrome",

@@ -195,6 +195,8 @@ HTTP 错误统一为 `application/json; charset=utf-8`，格式为 `{"error":{"c
 
 仓库必须拥有可重复运行的真实 Chromium E2E，覆盖静态 `file:`、本机服务、malformed manifest、精确 `204` 响应消费和关闭后的页面状态。HTML 发现回归还必须把服务端扫描结果与真实 Chrome 解析结果做差分比较，覆盖 manifest `id`、`type` 和 MathML integration 相关属性中的命名与数字字符引用，同时证明 JSON script text 不被 entity 解码。该门禁在本地标准测试入口与 CI 都必须执行。
 
+Ubuntu 24.04 CI 必须把 `browser-actions/setup-chrome` 输出经 `readlink -f` 解析后，精确验证为固定 CfT 144.0.7559.109 的 `/opt/hostedtoolcache/setup-chrome/chrome/144.0.7559.109/x64/chrome`。由于该平台的 AppArmor 会限制下载版 Chromium sandbox 所需的非特权 user namespace，CI 只能为这个无通配符的精确可执行路径加载仓库专用 profile，并仅授予 `userns`；Chrome sandbox 必须保持启用。不得使用 `--no-sandbox`、setuid helper、全局关闭 AppArmor、修改全局 AppArmor userns sysctl 或任何扩大到其他可执行文件的路径规则作为测试通过手段。
+
 浏览器验证包含两个用途不同的控制。fetch-abort 监控控制必须在真实 Chrome 中发出慢请求并中止它，确认 CDP 实际观察到与该 request id 对应的 `Network.loadingFailed`、`net::ERR_ABORTED` 和 `canceled: true`；它只证明网络事件诊断链有效，不能替代浏览器门禁失败证明。另设浏览器门禁元控制，由外层测试启动内层子进程。正常和中止内层必须调用同一个实际生产预览 E2E helper 与流程：启动生产 CLI，加载符合契约的 HTML，等待 session 与 DOM ready，再通过真实页面交互发出实际 `POST /__dl/select`。正常内层必须继续观察该请求的精确 `204`、对应的 `Network.loadingFinished`、页面成功状态，以及 mode `0600` 的 `selection.json`，然后以 `0` 退出。中止内层必须在同一实际选择请求出现 `Network.requestWillBeSent` 后，由测试层 `Fetch` pause 保持该请求，再杀死 Chrome，并要求内层以非零状态退出；不得用通用 data URL、单独 CDP promise 或未走生产 CLI 和 bootstrap 的合成请求代替。外层断言只有同时观察到正常内层为零、中止内层为非零时才通过，防止把跳过、未启动或中止后的静默退出误报为门禁成功。Chrome/Chromium 只属于测试基础设施，不得给生产服务、bootstrap 或预览 HTML 增加运行时 npm 依赖。
 
 生命周期测试必须以可控文件系统 seam 确定性阻塞写入，分别向真实子进程发送 SIGINT 和 SIGTERM，证明 4 秒进入 force、5 秒绝对退出、排队未开始工作不执行、force fence 后不开始 rename。不得用概率竞态或依赖机器负载的短暂 sleep 代替阻塞控制。
