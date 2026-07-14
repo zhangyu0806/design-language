@@ -209,7 +209,7 @@ export async function launchChrome(url, options = {}) {
     "--no-default-browser-check",
     "--disable-background-networking",
     "--disable-component-update",
-  ], { detached: true, stdio: ["ignore", "ignore", "pipe", "pipe", "pipe"] });
+  ], { detached: true, env: { ...process.env, TMPDIR: profile }, stdio: ["ignore", "ignore", "pipe", "pipe", "pipe"] });
   child.stderr.resume();
   const transport = createTransport(child);
   let sessionId;

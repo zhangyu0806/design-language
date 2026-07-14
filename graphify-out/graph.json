@@ -3873,8 +3873,8 @@
       "source_file": "tests/dl-preview-cdp.mjs",
       "source_location": "L161",
       "weight": 1.0,
-      "_src": "dl_preview_cdp_resolvepagetarget",
-      "_tgt": "dl_preview_server_test_send",
+      "_src": "dl_preview_server_test_send",
+      "_tgt": "dl_preview_cdp_resolvepagetarget",
       "source": "dl_preview_server_test_send",
       "target": "dl_preview_cdp_resolvepagetarget"
     },
